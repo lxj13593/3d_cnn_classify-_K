@@ -1,0 +1,32 @@
+# Local datasets and generated crop previews
+/datasets/
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Trained weights and checkpoints
+/model_best_last/
+*.pth
+*.pt
+*.ckpt
+
+# Experiment outputs
+/train_val_result/
+/test_result/
+/runs/
+/logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
