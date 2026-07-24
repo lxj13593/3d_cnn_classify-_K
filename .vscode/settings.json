@@ -4,5 +4,13 @@
     "python.defaultInterpreterPath": "d:\\anconda\\envs\\pytorch-2.7.1-gpu\\python.exe",
     "code-runner.showRunCommandInEditorContextMenu": false,
     "code-runner.showRunCommandInExplorerContextMenu": false,
-    "code-runner.showRunIconInEditorTitleMenu": false
+    "code-runner.showRunIconInEditorTitleMenu": false,
+    "csv-edit.readOption_hasHeader": "true",
+    "csv-edit.writeOption_hasHeader": "true",
+    "workbench.editorAssociations": {
+        "*.csv": "csv-viz.csvEditor",
+        "*.xlsx": "csvFormatter.preview"
+    },
+    "excel-viewer.showInfo": false,
+    "tableViewer.tabOrientation": "horizontal"
 }
