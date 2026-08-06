@@ -38,6 +38,40 @@ NORMALIZATION_SCOPE = "per_sample_full_volume"
 LOWER_PERCENTILE = 1.0
 UPPER_PERCENTILE = 99.0
 NORMALIZATION_EPSILON = 1e-6
+EVEN_PADDING_MODE = "replicate"
+EVEN_PADDING_SIDE = "positive_end_only"
+
+
+def to_even_shape(shape_dhw: tuple[int, int, int]) -> tuple[int, int, int]:
+    return tuple(size + (size % 2) for size in shape_dhw)
+
+
+def get_even_padding_params() -> dict[str, object]:
+    return {
+        "method": "pad_odd_dimensions_to_next_even",
+        "mode": EVEN_PADDING_MODE,
+        "side": EVEN_PADDING_SIDE,
+        "applied_after_normalization_and_training_augmentation": True,
+        "crop": False,
+        "interpolation": False,
+        "source_voxels_preserved": True,
+    }
+
+
+def pad_volume_to_even(volume: torch.Tensor) -> torch.Tensor:
+    if volume.ndim != 4:
+        raise ValueError(f"Expected C/D/H/W tensor, got shape {tuple(volume.shape)}")
+    depth, height, width = volume.shape[-3:]
+    pad_d = depth % 2
+    pad_h = height % 2
+    pad_w = width % 2
+    if not (pad_d or pad_h or pad_w):
+        return volume
+    return F.pad(
+        volume,
+        (0, pad_w, 0, pad_h, 0, pad_d),
+        mode=EVEN_PADDING_MODE,
+    )
 
 
 def is_dataset_root(path: Path) -> bool:
@@ -343,7 +377,7 @@ class MultiBoardRawDataset(Dataset):
 
     @property
     def shapes(self) -> list[tuple[int, int, int]]:
-        return [sample.shape_dhw for sample in self.samples]
+        return [to_even_shape(sample.shape_dhw) for sample in self.samples]
 
     def _read_volume(self, sample: RawSample) -> tuple[np.ndarray, float, float]:
         raw = np.fromfile(sample.raw_path, dtype=RAW_DTYPE)
@@ -427,6 +461,14 @@ class MultiBoardRawDataset(Dataset):
         volume = normalize_percentile(volume, lower, upper)
         if self.augment:
             volume = self._intensity_augmentation(volume)
+        volume = pad_volume_to_even(volume)
+
+        model_shape_dhw = to_even_shape(sample.shape_dhw)
+        if tuple(volume.shape[-3:]) != model_shape_dhw:
+            raise RuntimeError(
+                f"Even-size padding failed for {sample.sample_id}: "
+                f"expected {model_shape_dhw}, got {tuple(volume.shape[-3:])}"
+            )
 
         return {
             "volume": volume,
@@ -435,7 +477,10 @@ class MultiBoardRawDataset(Dataset):
             "board": sample.board,
             "sequence": sample.sequence,
             "raw_shape_whd": "x".join(str(value) for value in sample.shape_whd),
-            "input_shape_dhw": "x".join(str(value) for value in sample.shape_dhw),
+            "source_input_shape_dhw": "x".join(
+                str(value) for value in sample.shape_dhw
+            ),
+            "input_shape_dhw": "x".join(str(value) for value in model_shape_dhw),
             "raw_path": str(sample.raw_path),
         }
 
@@ -568,8 +613,12 @@ def get_fold_loaders(
 
 def summarize_dataset(dataset: MultiBoardRawDataset) -> dict[str, object]:
     label_counts = Counter(sample.label for sample in dataset.samples)
-    shape_counts = Counter(
+    source_shape_counts = Counter(
         "x".join(str(value) for value in sample.shape_whd)
+        for sample in dataset.samples
+    )
+    input_shape_counts = Counter(
+        "x".join(str(value) for value in to_even_shape(sample.shape_dhw))
         for sample in dataset.samples
     )
     return {
@@ -577,7 +626,9 @@ def summarize_dataset(dataset: MultiBoardRawDataset) -> dict[str, object]:
         "normal": label_counts["normal"],
         "defective": label_counts["defective"],
         "boards": len({sample.board for sample in dataset.samples}),
-        "raw_shape_whd_counts": dict(sorted(shape_counts.items())),
+        "source_raw_shape_whd_counts": dict(sorted(source_shape_counts.items())),
+        "model_input_shape_dhw_counts": dict(sorted(input_shape_counts.items())),
+        "even_padding": get_even_padding_params(),
     }
 
 

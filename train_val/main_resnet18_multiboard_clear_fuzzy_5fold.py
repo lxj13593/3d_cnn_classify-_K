@@ -8,7 +8,7 @@ import os
 import random
 import sys
 import time
-from collections import Counter
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -39,13 +39,13 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from data_operate.data_load_multiboard_clear import (  # noqa: E402
+from data_operate.data_load_multiboard_clear_fuzzy import (  # noqa: E402
     CLASS_TO_INDEX,
     ShapeBatchSampler,
     get_augmentation_params,
     get_fold_loaders,
     get_normalization_params,
-    resolve_dataset_root,
+    resolve_dataset_parent,
     summarize_dataset,
 )
 from model.resnet18_3d_multiboard import (  # noqa: E402
@@ -54,8 +54,8 @@ from model.resnet18_3d_multiboard import (  # noqa: E402
 )
 
 
-EXPERIMENT_NAME = "resnet18_multiboard_clear_5fold"
-DEFAULT_SPLIT_ROOT = PROJECT_ROOT / "datasets" / "multiboard_clear_5fold"
+EXPERIMENT_NAME = "resnet18_multiboard_clear_fuzzy_5fold"
+DEFAULT_SPLIT_ROOT = PROJECT_ROOT / "datasets" / "multiboard_clear_fuzzy_5fold"
 DEFAULT_MODEL_ROOT = PROJECT_ROOT / "model_best_last" / EXPERIMENT_NAME
 DEFAULT_RESULT_ROOT = PROJECT_ROOT / "train_val_result" / EXPERIMENT_NAME
 
@@ -96,19 +96,20 @@ class EvaluationResult:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Train the original 3D ResNet18 with within-board stratified "
-            "5-fold train/validation cross-validation."
+            "Train the original 3D ResNet18 on the combined clear/fuzzy "
+            "multi-board dataset with within-board stratified 5-fold "
+            "train/validation cross-validation."
         )
     )
     parser.add_argument("--split-root", type=Path, default=DEFAULT_SPLIT_ROOT)
     parser.add_argument(
-        "--dataset-root",
+        "--dataset-parent",
         type=Path,
         default=None,
         help=(
-            "Path to clear_binary_dataset. If omitted, use DRILL_DATASET_ROOT "
-            "when set; otherwise prefer datasets/clear_binary_dataset under "
-            "the project, then use a stored path or drive discovery."
+            "Directory containing clear_binary_dataset and fuzzy_binary_dataset. "
+            "If omitted, use DRILL_COMBINED_DATASET_ROOT, project datasets, "
+            "or mounted-drive discovery."
         ),
     )
     parser.add_argument("--model-root", type=Path, default=DEFAULT_MODEL_ROOT)
@@ -315,6 +316,9 @@ def evaluate(
                         "sample_id": batch["sample_id"][index],
                         "board": batch["board"][index],
                         "sequence": batch["sequence"][index],
+                        "difficulty": batch["difficulty"][index],
+                        "source_dataset": batch["source_dataset"][index],
+                        "source_class_dir": batch["source_class_dir"][index],
                         "raw_shape_whd": batch["raw_shape_whd"][index],
                         "input_shape_dhw": batch["input_shape_dhw"][index],
                         "raw_path": batch["raw_path"][index],
@@ -521,6 +525,12 @@ def dataset_integrity_check(train_loader, val_loader, fold: int) -> None:
         raise ValueError(f"Fold {fold}: training set does not contain all 15 boards")
     if len({sample.board for sample in val_samples}) != 15:
         raise ValueError(f"Fold {fold}: validation set does not contain all 15 boards")
+    for split_name, samples in (("train", train_samples), ("validation", val_samples)):
+        difficulties = {sample.difficulty for sample in samples}
+        if difficulties != {"clear", "fuzzy"}:
+            raise ValueError(
+                f"Fold {fold}: {split_name} difficulty set is {difficulties}"
+            )
 
 
 def make_history_row(
@@ -540,7 +550,8 @@ def load_split_config(split_root: Path) -> dict[str, object]:
     path = split_root / "split_config.json"
     if not path.is_file():
         raise FileNotFoundError(
-            f"Missing {path}. Run data_operate/make_multiboard_clear_5fold.py first."
+            f"Missing {path}. Run "
+            "data_operate/make_multiboard_clear_fuzzy_5fold.py first."
         )
     with path.open("r", encoding="utf-8") as handle:
         config = json.load(handle)
@@ -548,6 +559,19 @@ def load_split_config(split_root: Path) -> dict[str, object]:
         raise ValueError("This experiment requires train/validation folds without test sets")
     if int(config.get("n_splits", -1)) != N_SPLITS:
         raise ValueError(f"Expected {N_SPLITS} folds, got {config.get('n_splits')}")
+    expected_counts = {
+        "sample_count": 5728,
+        "normal_count": 4431,
+        "defective_count": 1297,
+        "clear_count": 4403,
+        "fuzzy_count": 1325,
+    }
+    for key, expected in expected_counts.items():
+        if int(config.get(key, -1)) != expected:
+            raise ValueError(
+                f"Split config {key} mismatch: expected {expected}, "
+                f"got {config.get(key)}"
+            )
     return config
 
 
@@ -578,7 +602,7 @@ def run_fold(
     train_loader, val_loader = get_fold_loaders(
         args.split_root,
         fold,
-        dataset_root=args.dataset_root,
+        dataset_parent=args.dataset_parent,
         batch_size=args.batch_size,
         num_workers=args.num_workers,
         seed=seed,
@@ -616,7 +640,7 @@ def run_fold(
         "amp_enabled": amp_enabled,
         "deterministic_algorithms": args.deterministic,
         "device": str(device),
-        "dataset_root_runtime": str(args.dataset_root),
+        "dataset_parent_runtime": str(args.dataset_parent),
         "fold": fold,
         "fold_seed": seed,
     }
@@ -762,6 +786,28 @@ def format_percent(mean: float, std: float) -> str:
     return f"{mean * 100:.2f}% ± {std * 100:.2f}%"
 
 
+def save_grouped_oof_metrics(
+    path: Path,
+    predictions: list[dict[str, object]],
+    group_fields: tuple[str, ...],
+) -> None:
+    groups: dict[tuple[str, ...], list[dict[str, object]]] = defaultdict(list)
+    for row in predictions:
+        key = tuple(str(row[field]) for field in group_fields)
+        groups[key].append(row)
+    output_rows: list[dict[str, object]] = []
+    for key, rows in sorted(groups.items()):
+        metrics = calculate_metrics(
+            [int(row["label"]) for row in rows],
+            [float(row["probability_defective"]) for row in rows],
+            average_loss=float(
+                np.mean([float(row["sample_loss"]) for row in rows])
+            ),
+        )
+        output_rows.append({**dict(zip(group_fields, key)), **metrics})
+    write_csv(path, output_rows)
+
+
 def try_write_excel(path: Path, rows: list[dict[str, object]]) -> None:
     try:
         import pandas as pd
@@ -824,10 +870,26 @@ def save_cross_validation_summary(
     )
     save_metrics_csv(result_root / "oof_metrics_best_loss.csv", oof_metrics)
     save_json(result_root / "oof_metrics_best_loss.json", oof_metrics)
+    save_grouped_oof_metrics(
+        result_root / "oof_metrics_best_loss_by_difficulty.csv",
+        oof_rows,
+        ("difficulty",),
+    )
+    save_grouped_oof_metrics(
+        result_root / "oof_metrics_best_loss_by_board.csv",
+        oof_rows,
+        ("board",),
+    )
+    save_grouped_oof_metrics(
+        result_root / "oof_metrics_best_loss_by_board_difficulty.csv",
+        oof_rows,
+        ("board", "difficulty"),
+    )
 
-    if completed_folds == list(range(N_SPLITS)) and len(oof_rows) != 4403:
+    if completed_folds == list(range(N_SPLITS)) and len(oof_rows) != 5728:
         raise ValueError(
-            f"Complete 5-fold run must contain 4403 OOF predictions, got {len(oof_rows)}"
+            f"Complete 5-fold run must contain 5728 OOF predictions, "
+            f"got {len(oof_rows)}"
         )
 
 
@@ -841,13 +903,13 @@ def main() -> None:
     folds = parse_folds(args.folds)
     device = choose_device(args.device)
     split_config = load_split_config(args.split_root)
-    args.dataset_root = resolve_dataset_root(
-        explicit_root=args.dataset_root,
-        stored_root=split_config.get("dataset_root"),
+    args.dataset_parent = resolve_dataset_parent(
+        explicit_root=args.dataset_parent,
+        stored_root=split_config.get("dataset_parent"),
     )
     split_config = {
         **split_config,
-        "dataset_root_runtime": str(args.dataset_root),
+        "dataset_parent_runtime": str(args.dataset_parent),
         "raw_paths_resolved_from_relative_manifest_paths": True,
     }
 
@@ -868,15 +930,15 @@ def main() -> None:
             "primary_checkpoint": "best_loss",
             "internal_test_set": False,
             "external_test_included": False,
-            "dataset_root_runtime": str(args.dataset_root),
+            "dataset_parent_runtime": str(args.dataset_parent),
             "split_config": split_config,
         },
     )
 
     print("=" * 100)
-    print("Original 3D ResNet18: multi-board 5-fold cross-validation")
+    print("Original 3D ResNet18: clear + fuzzy multi-board 5-fold CV")
     print(f"Folds: {folds}")
-    print(f"Dataset root (read only): {args.dataset_root}")
+    print(f"Dataset parent (read only): {args.dataset_parent}")
     print(f"Split root:  {args.split_root}")
     print(f"Model root:  {args.model_root}")
     print(f"Result root: {args.result_root}")

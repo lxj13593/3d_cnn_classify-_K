@@ -39,22 +39,23 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from data_operate.data_load_multiboard_clear import (  # noqa: E402
+from data_operate.data_load_multiboard_clear_even import (  # noqa: E402
     CLASS_TO_INDEX,
     ShapeBatchSampler,
     get_augmentation_params,
+    get_even_padding_params,
     get_fold_loaders,
     get_normalization_params,
     resolve_dataset_root,
     summarize_dataset,
 )
-from model.resnet18_3d_multiboard import (  # noqa: E402
+from model.resnet18_3d_multiboard_even import (  # noqa: E402
     architecture_metadata,
     resnet18_3d,
 )
 
 
-EXPERIMENT_NAME = "resnet18_multiboard_clear_5fold"
+EXPERIMENT_NAME = "resnet18_multiboard_clear_even_5fold"
 DEFAULT_SPLIT_ROOT = PROJECT_ROOT / "datasets" / "multiboard_clear_5fold"
 DEFAULT_MODEL_ROOT = PROJECT_ROOT / "model_best_last" / EXPERIMENT_NAME
 DEFAULT_RESULT_ROOT = PROJECT_ROOT / "train_val_result" / EXPERIMENT_NAME
@@ -71,9 +72,9 @@ DROPOUT_RATE = 0.5
 DECISION_THRESHOLD = 0.5
 
 CHECKPOINT_FILES = {
-    "best_f1": "best_f1_resnet18_3d.pth",
-    "best_loss": "best_loss_resnet18_3d.pth",
-    "last": "last_resnet18_3d.pth",
+    "best_f1": "best_f1_resnet18_3d_even_input.pth",
+    "best_loss": "best_loss_resnet18_3d_even_input.pth",
+    "last": "last_resnet18_3d_even_input.pth",
 }
 CHECKPOINT_ORDER = ("best_f1", "best_loss", "last")
 METRIC_DISPLAY = {
@@ -96,8 +97,8 @@ class EvaluationResult:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Train the original 3D ResNet18 with within-board stratified "
-            "5-fold train/validation cross-validation."
+            "Train the original 3D ResNet18 on losslessly padded even-size "
+            "inputs with within-board stratified 5-fold cross-validation."
         )
     )
     parser.add_argument("--split-root", type=Path, default=DEFAULT_SPLIT_ROOT)
@@ -316,6 +317,9 @@ def evaluate(
                         "board": batch["board"][index],
                         "sequence": batch["sequence"][index],
                         "raw_shape_whd": batch["raw_shape_whd"][index],
+                        "source_input_shape_dhw": batch[
+                            "source_input_shape_dhw"
+                        ][index],
                         "input_shape_dhw": batch["input_shape_dhw"][index],
                         "raw_path": batch["raw_path"][index],
                         "label": int(labels_cpu[index]),
@@ -390,6 +394,7 @@ def checkpoint_payload(
         "normalization_params": get_normalization_params(),
         "norm_params": get_normalization_params(),
         "augmentation_params": get_augmentation_params(),
+        "input_preprocessing": get_even_padding_params(),
         "class_to_index": dict(CLASS_TO_INDEX),
         "decision_threshold": DECISION_THRESHOLD,
         "loss_function": "CrossEntropyLoss_unweighted",
@@ -613,6 +618,7 @@ def run_fold(
         "optimizer": "AdamW",
         "scheduler": "CosineAnnealingLR",
         "loss": "CrossEntropyLoss_unweighted",
+        "input_preprocessing": get_even_padding_params(),
         "amp_enabled": amp_enabled,
         "deterministic_algorithms": args.deterministic,
         "device": str(device),
@@ -632,6 +638,7 @@ def run_fold(
     print(f"Model parameters: {parameter_count:,}")
     print(f"Train: {train_summary}")
     print(f"Val:   {val_summary}")
+    print("Input: odd dimensions padded to next even size with replicate padding")
     print("Loss: unweighted CrossEntropyLoss | primary checkpoint: best_loss")
     print("=" * 100)
 
@@ -865,6 +872,7 @@ def main() -> None:
             "model": architecture_metadata(),
             "normalization": get_normalization_params(),
             "augmentation": get_augmentation_params(),
+            "input_preprocessing": get_even_padding_params(),
             "primary_checkpoint": "best_loss",
             "internal_test_set": False,
             "external_test_included": False,
@@ -874,7 +882,7 @@ def main() -> None:
     )
 
     print("=" * 100)
-    print("Original 3D ResNet18: multi-board 5-fold cross-validation")
+    print("Original 3D ResNet18: multi-board even-input 5-fold cross-validation")
     print(f"Folds: {folds}")
     print(f"Dataset root (read only): {args.dataset_root}")
     print(f"Split root:  {args.split_root}")

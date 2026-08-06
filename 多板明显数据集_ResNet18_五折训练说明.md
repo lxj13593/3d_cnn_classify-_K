@@ -2,7 +2,7 @@
 
 ## 1. 本次实验范围
 
-- 数据源相对位置：`<任意盘符>:\325_275_and_sphere_data\钻孔数据325_275\clear_binary_dataset`
+- 数据源默认位置：`datasets\clear_binary_dataset`
 - 样本总数：4403，其中正常 3262、明显缺陷 1141，共 15 块板。
 - 模型：原始 3D ResNet18 基线，不含 ECA、Head ROI 或其他结构改动。
 - 评估：五折交叉验证，每折约 80% 训练、20% 验证。
@@ -23,9 +23,9 @@
 
 `datasets/multiboard_clear_5fold`
 
-这里只保存 CSV/JSON，不保存 RAW 副本。清单只保存 `raw_relative_path`，不保存带盘符的绝对数据路径；因此移动盘从 F 变成 E 后不会继续寻找旧 F 盘路径。
+这里只保存 CSV/JSON，不保存 RAW 副本。清单只保存 `raw_relative_path`，不保存带盘符的绝对数据路径，因此项目整体移动到另一台电脑后仍可按项目相对位置读取。
 
-未指定数据目录时，脚本会在当前已挂载盘符中搜索上述相对位置。也可以通过 `--dataset-root`、PowerShell 的 `-DatasetRoot`，或环境变量 `DRILL_DATASET_ROOT` 明确指定。若检测到多份匹配数据，脚本会停止并要求手动选择，避免读错数据。
+未指定数据目录时，脚本默认读取项目内的 `datasets\clear_binary_dataset`；也兼容把数据集两类目录直接放进 `datasets`，或放进 `datasets` 下唯一一个子文件夹。`--dataset-root`、PowerShell 的 `-DatasetRoot` 和环境变量 `DRILL_DATASET_ROOT` 可用于明确覆盖。项目内尚未放入数据时，脚本才会回退搜索旧外接盘位置。
 
 ## 3. 五折划分规则
 
@@ -93,10 +93,10 @@ RAW 文件名和数据清单中的尺寸顺序是“宽 x 高 x 长”，PyTorch
 & "E:\pythonproject\3d_cnn_classify _K\train_val\run_resnet18_multiboard_clear_5fold.ps1"
 ```
 
-移动盘变为 E 盘时可以依靠自动搜索，也可以明确指定：
+默认数据位置为项目内的 `datasets\clear_binary_dataset`，无需传数据路径。也可以明确指定：
 
 ```powershell
-& "E:\pythonproject\3d_cnn_classify _K\train_val\run_resnet18_multiboard_clear_5fold.ps1" -DatasetRoot "E:\325_275_and_sphere_data\钻孔数据325_275\clear_binary_dataset"
+& "E:\pythonproject\3d_cnn_classify _K\train_val\run_resnet18_multiboard_clear_5fold.ps1" -DatasetRoot ".\datasets\clear_binary_dataset"
 ```
 
 若另一台电脑的 PyTorch 环境位置不同，可再传入 `-PythonExe "该环境的python.exe完整路径"`。
@@ -112,8 +112,8 @@ RAW 文件名和数据清单中的尺寸顺序是“宽 x 高 x 长”，PyTorch
 也可以分别运行：
 
 ```powershell
-python data_operate\make_multiboard_clear_5fold.py --dataset-root "E:\325_275_and_sphere_data\钻孔数据325_275\clear_binary_dataset"
-python train_val\main_resnet18_multiboard_clear_5fold.py --dataset-root "E:\325_275_and_sphere_data\钻孔数据325_275\clear_binary_dataset"
+python data_operate\make_multiboard_clear_5fold.py
+python train_val\main_resnet18_multiboard_clear_5fold.py
 ```
 
 ## 8. 保存结果
