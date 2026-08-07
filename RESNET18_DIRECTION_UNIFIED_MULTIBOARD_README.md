@@ -67,15 +67,9 @@ new_data_test_3boards_0024_0030_0031
 datasets/resnet18_multiboard_direction_unified_5fold/
 ```
 
-五折归属不是重新随机划分。清单生成器读取下面已经锁定的 `SampleID → validation_fold` 数据：
+清单生成器直接读取完整体积训练集、完整体积锁定测试集以及对应的 Head40 方向审计数据，不依赖任何旧 `datasets/...5fold` 目录、固定划分文件或旧划分脚本。
 
-```text
-datasets/resnet18_multiboard_final_5fold/all_samples_with_validation_fold.csv
-datasets/resnet18_multiboard_final_5fold/locked_test_manifest.csv
-datasets/resnet18_multiboard_final_5fold/split_config.json
-```
-
-这里只继承固定的样本身份和折号，不执行该目录对应的任何脚本。这样可以保证完整体积统一方向实验与其他对照实验使用相同五折。
+训练池按“板号 + 标签 + 完整体积 RAW 尺寸”分组。每组先按 SampleID 排序，再使用固定种子 42 的确定性算法分配 `validation_fold`；余数分配同时平衡分板标签数、分板总数、尺寸标签数、类别总数和折总数。Head40 统一方向清单使用相同 SampleID、完整体积尺寸和算法，因此两套实验会得到逐 SampleID 完全一致的五折归属。
 
 各折验证样本数固定为：
 
@@ -247,6 +241,7 @@ powershell -ExecutionPolicy Bypass -File .\train_val\run_resnet18_multiboard_dir
   -BatchSize 4 `
   -NumWorkers 0 `
   -TrainDatasetRoot "F:\...\multiboard_binary_dataset_no_initial_board" `
+  -TestDatasetRoot "F:\...\new_data_test_3boards_0024_0030_0031" `
   -OrientationTrainDatasetRoot "F:\...\multiboard_head40_toml" `
   -OrientationTestDatasetRoot "F:\...\test_3boards_head40_toml" `
   -PythonExe "C:\...\python.exe"
@@ -277,6 +272,7 @@ powershell -ExecutionPolicy Bypass -File .\test\run_resnet18_multiboard_directio
 powershell -ExecutionPolicy Bypass -File .\test\run_resnet18_multiboard_direction_unified_3boards.ps1 `
   -BatchSize 4 `
   -NumWorkers 0 `
+  -TrainDatasetRoot "F:\...\multiboard_binary_dataset_no_initial_board" `
   -TestDatasetRoot "F:\...\new_data_test_3boards_0024_0030_0031" `
   -OrientationTrainDatasetRoot "F:\...\multiboard_head40_toml" `
   -OrientationTestDatasetRoot "F:\...\test_3boards_head40_toml" `

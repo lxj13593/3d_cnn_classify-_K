@@ -103,8 +103,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Train the TOML Head40 3D ResNet18 after standardizing every drill "
-            "head to the high-D side, using the exact validation-fold "
-            "assignments inherited from the full-volume baseline."
+            "head to the high-D side, using the same deterministic 22-board "
+            "five-fold assignment rule as the full-volume experiment."
         )
     )
     parser.add_argument("--split-root", type=Path, default=DEFAULT_SPLIT_ROOT)
@@ -577,7 +577,7 @@ def load_split_config(split_root: Path) -> dict[str, object]:
             f"got {config.get('train_dataset_name')}"
         )
     expected_assignment = (
-        "inherited_from_head40_baseline_with_runtime_direction_standardization"
+        "within_board_label_full_volume_shape_balanced_direction_unified"
     )
     if config.get("assignment") != expected_assignment:
         raise ValueError("Head40 split does not contain the unified-direction assignment")

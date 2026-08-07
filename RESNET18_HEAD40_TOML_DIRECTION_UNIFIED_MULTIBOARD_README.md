@@ -125,7 +125,9 @@ fold_board_summary.csv
 split_config.json
 ```
 
-清单生成器不会重新随机划分样本。它读取已经锁定的 Head40 `SampleID → validation_fold` 归属，使本实验与对比实验使用相同五折；这一步只读取固定 CSV 数据，不执行或导入其他实验脚本。
+清单生成器直接读取 Head40 训练集和锁定测试集的 `source_audit.csv`，不依赖任何旧 `datasets/...5fold` 目录、固定划分 CSV 或旧划分脚本。
+
+训练池按“板号 + 标签 + `FullVolumeRawShape`”分组。每组先按 SampleID 排序，再使用固定种子 42 的确定性算法分配 `validation_fold`；余数分配同时平衡分板标签数、分板总数、完整体积尺寸标签数、类别总数和折总数。完整体积统一方向清单使用同一组 SampleID、完整体积尺寸和算法，因此两套实验会得到逐 SampleID 完全一致的五折归属。
 
 生成清单时会核对：
 
@@ -163,7 +165,7 @@ test/run_resnet18_head40_toml_direction_unified_multiboard_3boards.ps1
 
 各文件职责：
 
-- `make_..._5fold.py`：独立完成数据根目录解析、方向元数据核对、固定折归属继承、清单审计和输出。
+- `make_..._5fold.py`：独立完成数据根目录解析、方向元数据核对、确定性五折分配、清单审计和输出。
 - `data_load_...py`：读取 Head40 RAW，在内存中统一 D 轴方向，完成增强、归一化和同尺寸组批。
 - `resnet18_3d_...py`：完整定义本实验使用的 Head40 3D ResNet18。
 - `main_..._5fold.py`：完成五折训练、验证、检查点保存、OOF 汇总和结果绘图。

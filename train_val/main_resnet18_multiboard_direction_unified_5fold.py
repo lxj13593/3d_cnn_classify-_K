@@ -574,10 +574,10 @@ def load_split_config(split_root: Path) -> dict[str, object]:
             f"got {config.get('train_dataset_name')}"
         )
     expected_assignment = (
-        "inherited_from_full_volume_baseline_with_runtime_direction_standardization"
+        "within_board_label_full_volume_shape_balanced_direction_unified"
     )
     if config.get("assignment") != expected_assignment:
-        raise ValueError("Split does not contain the direction-unified baseline assignment")
+        raise ValueError("Split does not contain the independent direction-unified assignment")
     direction = config.get("direction_standardization", {})
     if (
         config.get("direction_standardized") is not True

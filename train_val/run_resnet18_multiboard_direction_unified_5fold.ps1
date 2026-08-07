@@ -54,6 +54,12 @@ if ([string]::IsNullOrWhiteSpace($PythonExe) -or
 Push-Location $ProjectRoot
 try {
     $DirectionSplitArgs = @("data_operate\make_resnet18_multiboard_direction_unified_5fold.py")
+    if (-not [string]::IsNullOrWhiteSpace($TrainDatasetRoot)) {
+        $DirectionSplitArgs += @("--train-dataset-root", $TrainDatasetRoot)
+    }
+    if (-not [string]::IsNullOrWhiteSpace($TestDatasetRoot)) {
+        $DirectionSplitArgs += @("--test-dataset-root", $TestDatasetRoot)
+    }
     if (-not [string]::IsNullOrWhiteSpace($OrientationTrainDatasetRoot)) {
         $DirectionSplitArgs += @("--orientation-train-dataset-root", $OrientationTrainDatasetRoot)
     }
