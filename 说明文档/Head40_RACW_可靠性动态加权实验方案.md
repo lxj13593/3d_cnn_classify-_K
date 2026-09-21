@@ -114,7 +114,7 @@ C0 = normalize(mean(z_clear_normal))
 C1 = normalize(mean(z_clear_defective))
 ```
 
-若任一类没有足够的合格样本，则本折报错并停止；不得使用零中心或伪造中心。
+每一类至少需要 10 个合格样本；若任一类不足 10 个，则本折报错并停止；不得使用零中心或伪造中心。
 
 ## 7. 类中心更新
 
@@ -247,14 +247,14 @@ AP
 
 若 RACW 明显低于 1.0 CE，则停止该方向，不对 `p_thr`、`tau`、`w_min`、`mu` 做大范围搜索。
 
-## 13. 实验编号
+## 13. 实验命名
 
-```text
-E0：Head40-533 + CE，fuzzy weight = 1.0
-E1：Head40-533 + fixed fuzzy weight = 0.5
-E2：Head40-533 + fixed fuzzy weight = 0.0
-E3：Head40-533 + RACW（本方案）
-```
+本实验的代码与结果统一使用 RACW 名称，不占用、不覆盖已有的 E1～E4 文件。
+
+~~~text
+对照：Head40-533 + fixed fuzzy weight = 1.0 / 0.5 / 0.0
+本实验：Head40-533 + RACW
+~~~
 
 ## 14. 第二阶段条件
 
