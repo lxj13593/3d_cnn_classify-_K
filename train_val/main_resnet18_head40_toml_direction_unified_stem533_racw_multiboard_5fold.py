@@ -55,7 +55,9 @@ EXPERIMENT_NAME = (
     "racw_multiboard_22boards_5fold"
 )
 DEFAULT_SPLIT_ROOT = (
-    PROJECT_ROOT / "datasets" / "resnet18_head40_toml_direction_unified_multiboard_5fold"
+    PROJECT_ROOT
+    / "datasets"
+    / "resnet18_head40_toml_direction_unified_multiboard_5fold_clear_fuzzy_20260924"
 )
 DEFAULT_MODEL_ROOT = PROJECT_ROOT / "model_best_last" / EXPERIMENT_NAME
 DEFAULT_RESULT_ROOT = PROJECT_ROOT / "train_val_result" / EXPERIMENT_NAME

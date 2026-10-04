@@ -1,9 +1,7 @@
-"""Five-fold Head40-533 clear-only training with fuzzy samples weighted by 0.0.
+"""Five-fold Head40-533 reliability-weighted binary training.
 
-The binary task, folds, preprocessing, optimizer, checkpoint selection, and
-locked test protocol are unchanged.  Fuzzy samples have zero supervised-loss
-weight, so they are excluded before the model forward pass during training.
-Validation always uses ordinary unweighted cross-entropy.
+Clear defective samples use weight 1.25, both fuzzy groups use weight 0.5, and
+clear normal samples use weight 1.0.  Validation remains ordinary unweighted CE.
 """
 
 from __future__ import annotations
@@ -14,6 +12,7 @@ import sys
 import time
 from pathlib import Path
 
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -23,7 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from data_operate.data_load_resnet18_head40_toml_direction_unified_multiboard_ambiguous_weight00 import (  # noqa: E402
+from data_operate.data_load_resnet18_head40_toml_direction_unified_multiboard_clear_defect_weight125_fuzzy_weight05 import (  # noqa: E402
     AMBIGUOUS_DIFFICULTY,
     CLASS_TO_INDEX,
     ShapeBatchSampler,
@@ -36,7 +35,7 @@ from data_operate.data_load_resnet18_head40_toml_direction_unified_multiboard_am
     resolve_dataset_root,
     summarize_dataset,
 )
-from model.resnet18_3d_head40_toml_direction_unified_stem533_ambiguous_weight00_multiboard import (  # noqa: E402
+from model.resnet18_3d_head40_toml_direction_unified_stem533_clear_defect_weight125_fuzzy_weight05_multiboard import (  # noqa: E402
     architecture_metadata,
     resnet18_3d,
 )
@@ -45,7 +44,7 @@ from train_val import main_resnet18_head40_toml_direction_unified_stem533_multib
 
 EXPERIMENT_NAME = (
     "resnet18_head40_toml_direction_unified_stem533_"
-    "ambiguous_weight00_multiboard_22boards_5fold"
+    "clear_defect_weight125_fuzzy_weight05_multiboard_22boards_5fold"
 )
 DEFAULT_SPLIT_ROOT = (
     PROJECT_ROOT
@@ -64,31 +63,30 @@ LEARNING_RATE = 1e-4
 WEIGHT_DECAY = 1e-3
 LR_ETA_MIN = 1e-7
 DROPOUT_RATE = 0.5
-AMBIGUOUS_WEIGHT = 0.0
+AMBIGUOUS_WEIGHT = 0.5
+CLEAR_NORMAL_WEIGHT = 1.0
+CLEAR_DEFECTIVE_WEIGHT = 1.25
 
 CHECKPOINT_FILES = {
-    "best_f1": "best_f1_resnet18_head40_toml_direction_unified_stem533_ambiguous_weight00.pth",
-    "best_loss": "best_loss_resnet18_head40_toml_direction_unified_stem533_ambiguous_weight00.pth",
-    "last": "last_resnet18_head40_toml_direction_unified_stem533_ambiguous_weight00.pth",
+    "best_f1": "best_f1_stem533_cd125_fz05.pth",
+    "best_loss": "best_loss_stem533_cd125_fz05.pth",
+    "last": "last_stem533_cd125_fz05.pth",
 }
 CHECKPOINT_ORDER = ("best_f1", "best_loss", "last")
 
 EvaluationResult = baseline.EvaluationResult
 
 
-def ambiguity_weighting_metadata() -> dict[str, object]:
+def sample_weighting_metadata() -> dict[str, object]:
     return {
         "enabled_training_only": True,
         "label_task": "normal=0, defective=1",
         "ambiguous_definition": f"difficulty == {AMBIGUOUS_DIFFICULTY!r}",
-        "clear_weight": 1.0,
-        "ambiguous_weight": AMBIGUOUS_WEIGHT,
+        "clear_normal_weight": CLEAR_NORMAL_WEIGHT,
+        "clear_defective_weight": CLEAR_DEFECTIVE_WEIGHT,
+        "fuzzy_normal_weight": AMBIGUOUS_WEIGHT,
+        "fuzzy_defective_weight": AMBIGUOUS_WEIGHT,
         "loss_formula": "sum(sample_weight * CE_i) / sum(sample_weight)",
-        "zero_weight_execution": (
-            "fuzzy samples are excluded before model forward; an all-fuzzy "
-            "batch is skipped without optimizer or BatchNorm update"
-        ),
-        "supervision_scope": "difficulty != 'fuzzy' (clear-only)",
         "validation_loss": "ordinary unweighted CrossEntropyLoss",
         "external_test_loss": "ordinary unweighted CrossEntropyLoss",
     }
@@ -97,8 +95,8 @@ def ambiguity_weighting_metadata() -> dict[str, object]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Train Head40-533 on the fixed 22-board folds with fuzzy samples "
-            "assigned zero training-loss weight (clear-only supervision)."
+            "Train Head40-533 with clear defective weight 1.25, clear normal "
+            "weight 1.0, and both fuzzy groups weighted at 0.5."
         )
     )
     parser.add_argument("--split-root", type=Path, default=DEFAULT_SPLIT_ROOT)
@@ -172,12 +170,7 @@ def train_one_epoch(
     epoch_index: int,
     num_epochs: int,
 ) -> dict[str, float]:
-    """Train one epoch with fuzzy samples assigned exactly zero CE weight.
-
-    Zero-weight samples are removed before the forward pass.  This makes the
-    weighted-loss formula well-defined for all-fuzzy batches and prevents those
-    batches from changing gradients or BatchNorm running statistics.
-    """
+    """Train one epoch with reliability and clear-defect sample weights."""
     model.train()
     batch_sampler = loader.batch_sampler
     if isinstance(batch_sampler, ShapeBatchSampler):
@@ -186,11 +179,9 @@ def train_one_epoch(
     weighted_loss_numerator = 0.0
     unweighted_loss_numerator = 0.0
     effective_weight_sum = 0.0
-    raw_sample_count = 0
-    supervised_sample_count = 0
-    ambiguous_sample_count = 0
-    skipped_all_ambiguous_batch_count = 0
-    optimizer_step_count = 0
+    sample_count = 0
+    ambiguous_count = 0
+    clear_defective_count = 0
     labels_all: list[int] = []
     probabilities_all: list[float] = []
 
@@ -201,30 +192,11 @@ def train_one_epoch(
         file=sys.stdout,
     )
     for batch in progress:
-        targets_cpu = batch["target"]
-        ambiguous = batch["ambiguous"].bool()
-        if ambiguous.ndim != 1 or ambiguous.numel() != targets_cpu.numel():
+        inputs = batch["volume"].to(device, non_blocking=True)
+        targets = batch["target"].to(device, non_blocking=True)
+        ambiguous = batch["ambiguous"].to(device, non_blocking=True).bool()
+        if ambiguous.ndim != 1 or ambiguous.numel() != targets.numel():
             raise ValueError("Ambiguity flags do not align with the training targets")
-
-        raw_batch_count = targets_cpu.size(0)
-        raw_sample_count += raw_batch_count
-        ambiguous_sample_count += int(ambiguous.sum().item())
-        weights = (~ambiguous).to(dtype=torch.float32)
-        supervised_mask = weights > 0
-        if not bool(supervised_mask.any().item()):
-            skipped_all_ambiguous_batch_count += 1
-            if effective_weight_sum > 0:
-                progress.set_postfix(
-                    loss=f"{weighted_loss_numerator / effective_weight_sum:.4f}",
-                    skipped=skipped_all_ambiguous_batch_count,
-                )
-            else:
-                progress.set_postfix(loss="n/a", skipped=skipped_all_ambiguous_batch_count)
-            continue
-
-        inputs = batch["volume"][supervised_mask].to(device, non_blocking=True)
-        targets = targets_cpu[supervised_mask].to(device, non_blocking=True)
-        weights = weights[supervised_mask].to(device, non_blocking=True)
         optimizer.zero_grad(set_to_none=True)
 
         with torch.amp.autocast(device_type=device.type, enabled=amp_enabled):
@@ -232,6 +204,19 @@ def train_one_epoch(
             loss_each = criterion(logits, targets)
             if loss_each.ndim != 1 or loss_each.numel() != targets.numel():
                 raise ValueError("Weighted CE requires one loss value per sample")
+            clear_defective = (~ambiguous) & (
+                targets == CLASS_TO_INDEX["defective"]
+            )
+            clear_weights = torch.where(
+                clear_defective,
+                torch.full_like(loss_each, CLEAR_DEFECTIVE_WEIGHT),
+                torch.full_like(loss_each, CLEAR_NORMAL_WEIGHT),
+            )
+            weights = torch.where(
+                ambiguous,
+                torch.full_like(loss_each, AMBIGUOUS_WEIGHT),
+                clear_weights,
+            )
             weighted_numerator = (loss_each * weights).sum()
             weight_denominator = weights.sum()
             loss = weighted_numerator / weight_denominator
@@ -239,37 +224,28 @@ def train_one_epoch(
         scaler.scale(loss).backward()
         scaler.step(optimizer)
         scaler.update()
-        optimizer_step_count += 1
 
         batch_count = targets.size(0)
         weighted_loss_numerator += float(weighted_numerator.detach().item())
         unweighted_loss_numerator += float(loss_each.detach().sum().item())
         effective_weight_sum += float(weight_denominator.detach().item())
-        supervised_sample_count += batch_count
+        sample_count += batch_count
+        ambiguous_count += int(ambiguous.detach().sum().item())
+        clear_defective_count += int(clear_defective.detach().sum().item())
         probabilities = torch.softmax(logits.detach(), dim=1)[:, 1]
         labels_all.extend(targets.detach().cpu().tolist())
         probabilities_all.extend(probabilities.cpu().tolist())
-        progress.set_postfix(
-            loss=f"{weighted_loss_numerator / effective_weight_sum:.4f}",
-            skipped=skipped_all_ambiguous_batch_count,
-        )
+        progress.set_postfix(loss=f"{weighted_loss_numerator / effective_weight_sum:.4f}")
 
-    if effective_weight_sum <= 0 or supervised_sample_count <= 0:
-        raise RuntimeError("No non-fuzzy samples were available for clear-only training")
     metrics = baseline.calculate_metrics(
         labels_all,
         probabilities_all,
         average_loss=weighted_loss_numerator / effective_weight_sum,
     )
-    metrics["unweighted_ce_loss"] = unweighted_loss_numerator / supervised_sample_count
+    metrics["unweighted_ce_loss"] = unweighted_loss_numerator / sample_count
     metrics["effective_weight_sum"] = effective_weight_sum
-    metrics["raw_sample_count"] = float(raw_sample_count)
-    metrics["supervised_sample_count"] = float(supervised_sample_count)
-    metrics["ambiguous_sample_count"] = float(ambiguous_sample_count)
-    metrics["skipped_all_ambiguous_batch_count"] = float(
-        skipped_all_ambiguous_batch_count
-    )
-    metrics["optimizer_step_count"] = float(optimizer_step_count)
+    metrics["ambiguous_sample_count"] = float(ambiguous_count)
+    metrics["clear_defective_sample_count"] = float(clear_defective_count)
     return metrics
 
 
@@ -277,8 +253,10 @@ def checkpoint_payload(**kwargs) -> dict[str, object]:
     payload = baseline.checkpoint_payload(**kwargs)
     payload["experiment"] = EXPERIMENT_NAME
     payload["model_metadata"] = architecture_metadata()
-    payload["loss_function"] = "CrossEntropyLoss_per_sample_ambiguous_weight00_clear_only"
-    payload["ambiguous_weighting"] = ambiguity_weighting_metadata()
+    payload["loss_function"] = (
+        "CrossEntropyLoss_per_sample_clear_defect_weight125_fuzzy_weight05"
+    )
+    payload["sample_weighting"] = sample_weighting_metadata()
     return payload
 
 
@@ -330,8 +308,11 @@ def run_fold(
         "eta_min": args.eta_min,
         "optimizer": "AdamW",
         "scheduler": "CosineAnnealingLR",
-        "loss": "per-sample CrossEntropyLoss with fuzzy weight 0.0 (clear-only)",
-        "ambiguous_weighting": ambiguity_weighting_metadata(),
+        "loss": (
+            "per-sample CrossEntropyLoss with clear defective weight 1.25, "
+            "clear normal weight 1.0, and fuzzy weight 0.5"
+        ),
+        "sample_weighting": sample_weighting_metadata(),
         "amp_enabled": amp_enabled,
         "deterministic_algorithms": args.deterministic,
         "device": str(device),
@@ -352,8 +333,8 @@ def run_fold(
     print(f"Train: {train_summary}")
     print(f"Val:   {val_summary}")
     print(
-        "Loss: per-sample CE; fuzzy difficulty weight=0.0 (clear-only); "
-        "primary checkpoint=best_loss"
+        "Loss: per-sample CE; clear normal=1.0, clear defective=1.25, "
+        "fuzzy normal/defective=0.5; primary checkpoint=best_loss"
     )
     print("=" * 100)
 
@@ -381,25 +362,11 @@ def run_fold(
         )
         scheduler.step()
         val_metrics = val_result.metrics
-        history_row = baseline.make_history_row(
-            epoch_index + 1, learning_rate, train_metrics, val_metrics
+        history.append(
+            baseline.make_history_row(
+                epoch_index + 1, learning_rate, train_metrics, val_metrics
+            )
         )
-        history_row.update(
-            {
-                "train_source_sample_count": train_metrics["raw_sample_count"],
-                "train_supervised_sample_count": train_metrics[
-                    "supervised_sample_count"
-                ],
-                "train_ignored_ambiguous_sample_count": train_metrics[
-                    "ambiguous_sample_count"
-                ],
-                "train_skipped_all_ambiguous_batch_count": train_metrics[
-                    "skipped_all_ambiguous_batch_count"
-                ],
-                "train_optimizer_step_count": train_metrics["optimizer_step_count"],
-            }
-        )
-        history.append(history_row)
 
         common_payload_args = {
             "model": model,
@@ -446,7 +413,7 @@ def run_fold(
 
         print(
             f"Fold {fold} epoch {epoch_index + 1:02d}: "
-            f"train clear-only loss={train_metrics['loss']:.4f}, "
+            f"train weighted loss={train_metrics['loss']:.4f}, "
             f"F1={train_metrics['f1']:.4f} | val loss={val_metrics['loss']:.4f}, "
             f"Acc={val_metrics['accuracy']:.4f}, P={val_metrics['precision']:.4f}, "
             f"R={val_metrics['recall']:.4f}, F1={val_metrics['f1']:.4f}, "
@@ -542,7 +509,7 @@ def main() -> None:
             "normalization": get_normalization_params(),
             "augmentation": get_augmentation_params(),
             "direction_standardization": get_direction_standardization_params(),
-            "ambiguous_weighting": ambiguity_weighting_metadata(),
+            "sample_weighting": sample_weighting_metadata(),
             "primary_checkpoint": "best_loss",
             "internal_test_set": False,
             "external_test_used_for_training_or_selection": False,
@@ -552,7 +519,10 @@ def main() -> None:
     )
 
     print("=" * 100)
-    print("Head40-533: fuzzy samples use zero training-loss weight (clear-only)")
+    print(
+        "Head40-533: clear normal=1.0, clear defective=1.25, "
+        "fuzzy normal/defective=0.5"
+    )
     print(f"Folds: {folds}")
     print(f"Dataset root (read only): {args.dataset_root}")
     print(f"Split root:  {args.split_root}")
