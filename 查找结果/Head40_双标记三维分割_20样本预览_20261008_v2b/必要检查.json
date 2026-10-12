@@ -1,0 +1,35 @@
+{
+  "samples": 20,
+  "same_sample_ids_and_order": true,
+  "old_versions_unchanged": true,
+  "old_folders": [
+    "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_3D_Canny_20样本预览_20261005",
+    "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_头部连通约束_20样本预览_20261008_v1",
+    "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_双标记三维分割_20样本预览_20261008_v2"
+  ],
+  "old_artifact_count": 142,
+  "empty_masks": 0,
+  "flagged_samples": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "training_run": false
+}

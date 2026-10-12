@@ -1,0 +1,1012 @@
+{
+  "config": {
+    "version": "center55_preview_20261008_v1",
+    "crop_mode": "center-55",
+    "fraction": 0.55,
+    "crop_width": "ceil(0.55*original_width)",
+    "positioning": "start=floor((original_width-kept)/2)",
+    "depth": 40,
+    "source_preview": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1",
+    "source_array": "image, not cropped",
+    "denoising": false,
+    "segmentation": false,
+    "resize": false,
+    "intensity_transform": false,
+    "dataset_modified": false,
+    "training_run": false
+  },
+  "samples": [
+    {
+      "index": 21,
+      "sample_id": "clear|normal|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|2502|061a38f3ef3e11da",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "2502",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "crop_shape_dhw": [
+        40,
+        16,
+        16
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-2502-3.9730_29_29_40-11.raw",
+      "raw_sha256": "c2840e811bcf0d23ebc63cb97380836c0a2acab27cd6bb73cd155707ad6199b6",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        6,
+        22,
+        6,
+        22
+      ],
+      "kept_volume_ratio": 0.30439952437574314,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/21_正常_B1022-0044_钻孔2502.png",
+      "array_file": "裁剪后体数据/21_正常_B1022-0044_钻孔2502.npz",
+      "center_yx": [
+        14.0,
+        14.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [
+        "奇数原宽29保留16：中心误差0.5体素"
+      ],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        13.5,
+        13.5
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\21_正常_B1022-0044_钻孔2502.npz",
+      "source_original_npz_sha256": "e28481b160f5df4496d02c835f1bd524aa84296654cd84f2c033b61208ae38fe"
+    },
+    {
+      "index": 22,
+      "sample_id": "fuzzy|normal|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|0534|6942c6294767c17a",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "0534",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "crop_shape_dhw": [
+        40,
+        16,
+        16
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-0534-0.7660_29_29_40-7.raw",
+      "raw_sha256": "04de0e11b6e41bf7a1c47ce1abde460c9544182c9db099722d7facdc489e5a18",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        6,
+        22,
+        6,
+        22
+      ],
+      "kept_volume_ratio": 0.30439952437574314,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/22_正常_B1022-0044_钻孔0534.png",
+      "array_file": "裁剪后体数据/22_正常_B1022-0044_钻孔0534.npz",
+      "center_yx": [
+        14.0,
+        14.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [
+        "奇数原宽29保留16：中心误差0.5体素"
+      ],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        13.5,
+        13.5
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\22_正常_B1022-0044_钻孔0534.npz",
+      "source_original_npz_sha256": "449bc4e1256e5be123484c0704768ce5c73929d4542e974d9b876d1109be2757"
+    },
+    {
+      "index": 23,
+      "sample_id": "clear|normal|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|2377|ac33af89c96ab123",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "2377",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "crop_shape_dhw": [
+        40,
+        16,
+        16
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-2377-3.9730_29_29_40-8.raw",
+      "raw_sha256": "ac4d653879c5c8ca49ab5f0b5ae3746c4dc264f85c535322a73ece3b36792de2",
+      "direction_flipped": false,
+      "validation_fold": 2,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        6,
+        22,
+        6,
+        22
+      ],
+      "kept_volume_ratio": 0.30439952437574314,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/23_正常_B1022-0044_钻孔2377.png",
+      "array_file": "裁剪后体数据/23_正常_B1022-0044_钻孔2377.npz",
+      "center_yx": [
+        14.0,
+        14.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [
+        "奇数原宽29保留16：中心误差0.5体素"
+      ],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        13.5,
+        13.5
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\23_正常_B1022-0044_钻孔2377.npz",
+      "source_original_npz_sha256": "9b0160b423fe8f9e98864bf0d03a92e4c92bcc2cc5d0fc21ed6b335450756577"
+    },
+    {
+      "index": 24,
+      "sample_id": "clear|normal|VT-X750-1029_0000000033_20250830_2512V664110703_20250830210309|2034|580afa0001ab3bc6",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1029_0000000033_20250830_2512V664110703_20250830210309",
+      "board_key": "B1029-0033",
+      "sequence": "2034",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "crop_shape_dhw": [
+        40,
+        21,
+        21
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1029_0000000033_20250830_2512V664110703_20250830210309\\drill\\drill-2034-3.4580_37_37_40-16.raw",
+      "raw_sha256": "08c0aaad9c40ee2156d668ee448e640d1c7f10077ba7598bef1bf08cd960fb2c",
+      "direction_flipped": false,
+      "validation_fold": 3,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        8,
+        29,
+        8,
+        29
+      ],
+      "kept_volume_ratio": 0.32213294375456536,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/24_正常_B1029-0033_钻孔2034.png",
+      "array_file": "裁剪后体数据/24_正常_B1029-0033_钻孔2034.npz",
+      "center_yx": [
+        18.0,
+        18.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        18.0,
+        18.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\24_正常_B1029-0033_钻孔2034.npz",
+      "source_original_npz_sha256": "d6f58f9f14b4d37fa020777fe0a93c43889e7317cb0703a014bf249d59c4bf81"
+    },
+    {
+      "index": 25,
+      "sample_id": "fuzzy|normal|VT-X750-1153_0000000004_20260112WB_2552V614702402_20260112195338|0911|8a48fd87cfb21f31",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1153_0000000004_20260112WB_2552V614702402_20260112195338",
+      "board_key": "B1153-0004",
+      "sequence": "0911",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "crop_shape_dhw": [
+        40,
+        21,
+        21
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1153_0000000004_20260112WB_2552V614702402_20260112195338\\drill\\drill-0911-1.2210_37_37_40-18.raw",
+      "raw_sha256": "7abbdb77cb8cec2061c210e14c9b4285230ab37badb074ba0ffc4492fa619db9",
+      "direction_flipped": false,
+      "validation_fold": 3,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        8,
+        29,
+        8,
+        29
+      ],
+      "kept_volume_ratio": 0.32213294375456536,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/25_正常_B1153-0004_钻孔0911.png",
+      "array_file": "裁剪后体数据/25_正常_B1153-0004_钻孔0911.npz",
+      "center_yx": [
+        18.0,
+        18.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        18.0,
+        18.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\25_正常_B1153-0004_钻孔0911.npz",
+      "source_original_npz_sha256": "a0e529f6ed17cd8fdc0f64aebab2dc2da5d01a788facb34eb739b9d698a90849"
+    },
+    {
+      "index": 26,
+      "sample_id": "clear|normal|VT-X750-1146_0000000001_20260128WB_2604V621785901_20260128182928|1308|e2b3440d14e28531",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1146_0000000001_20260128WB_2604V621785901_20260128182928",
+      "board_key": "B1146-0001",
+      "sequence": "1308",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "crop_shape_dhw": [
+        40,
+        21,
+        21
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1146_0000000001_20260128WB_2604V621785901_20260128182928\\drill\\drill-1308-2.6030_37_37_40-26.raw",
+      "raw_sha256": "aacc6fada2950f6ec97ca5d25f51fe166fe7a19e5549c95b237b90fda25279a6",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        8,
+        29,
+        8,
+        29
+      ],
+      "kept_volume_ratio": 0.32213294375456536,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/26_正常_B1146-0001_钻孔1308.png",
+      "array_file": "裁剪后体数据/26_正常_B1146-0001_钻孔1308.npz",
+      "center_yx": [
+        18.0,
+        18.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        18.0,
+        18.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\26_正常_B1146-0001_钻孔1308.npz",
+      "source_original_npz_sha256": "94c522cddcd4c86beb0a1bfdd50afe8e296d2d2e410513973cc50a552790be76"
+    },
+    {
+      "index": 27,
+      "sample_id": "fuzzy|normal|VT-X750-1029_0000000027_20250830_2512V662905103_20250830191528|2508|cb2eb811e8f7a9f0",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1029_0000000027_20250830_2512V662905103_20250830191528",
+      "board_key": "B1029-0027",
+      "sequence": "2508",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "crop_shape_dhw": [
+        40,
+        21,
+        21
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1029_0000000027_20250830_2512V662905103_20250830191528\\drill\\drill-2508-3.9150_37_37_40-6.raw",
+      "raw_sha256": "8f29eac4cc9ac6c7736ef954c48faaf82b2297c21bdc54870ed5ee94fb9f51d2",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        8,
+        29,
+        8,
+        29
+      ],
+      "kept_volume_ratio": 0.32213294375456536,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/27_正常_B1029-0027_钻孔2508.png",
+      "array_file": "裁剪后体数据/27_正常_B1029-0027_钻孔2508.npz",
+      "center_yx": [
+        18.0,
+        18.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        18.0,
+        18.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\27_正常_B1029-0027_钻孔2508.npz",
+      "source_original_npz_sha256": "c7d9dfc55893767ba79fba645aefd2d1b2d38a351bde2b0397d5834b992c19c8"
+    },
+    {
+      "index": 28,
+      "sample_id": "clear|normal|VT-X750-1305_0000000007_20260124WB_2602V619861402_20260124180218|0353|b296799db07e72e6",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1305_0000000007_20260124WB_2602V619861402_20260124180218",
+      "board_key": "B1305-0007",
+      "sequence": "0353",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "crop_shape_dhw": [
+        40,
+        27,
+        27
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1305_0000000007_20260124WB_2602V619861402_20260124180218\\drill\\drill-0353-0.3090_49_49_40-1.raw",
+      "raw_sha256": "75b140e8a51509750377fbd3088a5afb5347293949e722b0b1700df06f38baa6",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        11,
+        38,
+        11,
+        38
+      ],
+      "kept_volume_ratio": 0.3036234902124115,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/28_正常_B1305-0007_钻孔0353.png",
+      "array_file": "裁剪后体数据/28_正常_B1305-0007_钻孔0353.npz",
+      "center_yx": [
+        24.0,
+        24.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        24.0,
+        24.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\28_正常_B1305-0007_钻孔0353.npz",
+      "source_original_npz_sha256": "797f2bc9b3e1c5e7a0c6180640449e094c0b5e0e9ba5187f4f587ae42ab83dfc"
+    },
+    {
+      "index": 29,
+      "sample_id": "fuzzy|normal|VT-X750-1077_0000000001_20260113FZ_2533V686021602_20260113045203|1891|99dcc683d285f458",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1077_0000000001_20260113FZ_2533V686021602_20260113045203",
+      "board_key": "B1077-0001",
+      "sequence": "1891",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "crop_shape_dhw": [
+        40,
+        27,
+        27
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1077_0000000001_20260113FZ_2533V686021602_20260113045203\\drill\\drill-1891-3.0590_49_49_40-10.raw",
+      "raw_sha256": "af27cda757f0406e7ee6cb4f67c534ed5e1fa8e8cbf5b9fdff54874537b9f2a2",
+      "direction_flipped": false,
+      "validation_fold": 3,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        11,
+        38,
+        11,
+        38
+      ],
+      "kept_volume_ratio": 0.3036234902124115,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/29_正常_B1077-0001_钻孔1891.png",
+      "array_file": "裁剪后体数据/29_正常_B1077-0001_钻孔1891.npz",
+      "center_yx": [
+        24.0,
+        24.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        24.0,
+        24.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\29_正常_B1077-0001_钻孔1891.npz",
+      "source_original_npz_sha256": "f9c076a179a1a4de824119505c61336fabe3170eb6d35ea82bc1188b757a806a"
+    },
+    {
+      "index": 30,
+      "sample_id": "clear|normal|VT-X750-1305_0000000004_20260208WB_2604V626458002_20260208122741|1778|8bafe7551494c24f",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1305_0000000004_20260208WB_2604V626458002_20260208122741",
+      "board_key": "B1305-0004",
+      "sequence": "1778",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "crop_shape_dhw": [
+        40,
+        27,
+        27
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1305_0000000004_20260208WB_2604V626458002_20260208122741\\drill\\drill-1778-3.0590_49_49_40-12.raw",
+      "raw_sha256": "2eaefe002bad044cf2304870b820c22a8e643d27ff1382628924e63c77746f8d",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        11,
+        38,
+        11,
+        38
+      ],
+      "kept_volume_ratio": 0.3036234902124115,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/30_正常_B1305-0004_钻孔1778.png",
+      "array_file": "裁剪后体数据/30_正常_B1305-0004_钻孔1778.npz",
+      "center_yx": [
+        24.0,
+        24.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        24.0,
+        24.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\30_正常_B1305-0004_钻孔1778.npz",
+      "source_original_npz_sha256": "71cd591002e321016ab32d9d4c7ce97878e56587562eacdb49928dbf00df483c"
+    },
+    {
+      "index": 31,
+      "sample_id": "clear|defective|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|1888|76bfe20ad2c1463a",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "1888",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "crop_shape_dhw": [
+        40,
+        16,
+        16
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-1888-3.0590_29_29_40-6.raw",
+      "raw_sha256": "776105c63e94280eeca385c330373f4a56d85f0acf8beaaa57b4e7cf3b4627bf",
+      "direction_flipped": false,
+      "validation_fold": 3,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        6,
+        22,
+        6,
+        22
+      ],
+      "kept_volume_ratio": 0.30439952437574314,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/31_缺陷_B1022-0044_钻孔1888.png",
+      "array_file": "裁剪后体数据/31_缺陷_B1022-0044_钻孔1888.npz",
+      "center_yx": [
+        14.0,
+        14.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [
+        "奇数原宽29保留16：中心误差0.5体素"
+      ],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        13.5,
+        13.5
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\31_缺陷_B1022-0044_钻孔1888.npz",
+      "source_original_npz_sha256": "2937bb09732520eff209c2a2f9d7d34c5e64e2ecf705b6e8895f35e0a7c17162"
+    },
+    {
+      "index": 32,
+      "sample_id": "fuzzy|defective|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|2391|c9c36d8af682140d",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "2391",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "crop_shape_dhw": [
+        40,
+        16,
+        16
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-2391-3.9730_29_29_40-8.raw",
+      "raw_sha256": "c47652ae9ced7e8ae8c0e25d723b329fec2bf6113d052e0f14e842715e0d0358",
+      "direction_flipped": false,
+      "validation_fold": 2,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        6,
+        22,
+        6,
+        22
+      ],
+      "kept_volume_ratio": 0.30439952437574314,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/32_缺陷_B1022-0044_钻孔2391.png",
+      "array_file": "裁剪后体数据/32_缺陷_B1022-0044_钻孔2391.npz",
+      "center_yx": [
+        14.0,
+        14.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [
+        "奇数原宽29保留16：中心误差0.5体素"
+      ],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        13.5,
+        13.5
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\32_缺陷_B1022-0044_钻孔2391.npz",
+      "source_original_npz_sha256": "2efefd83b4757d9bac6ac10a7ef078a5767e1690a6d8129bc497d504cb572d48"
+    },
+    {
+      "index": 33,
+      "sample_id": "clear|defective|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|2166|fbda02785bf14851",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "2166",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "crop_shape_dhw": [
+        40,
+        16,
+        16
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-2166-3.5150_29_29_40-12.raw",
+      "raw_sha256": "7bc7ac37571466fb4ebb00df023543f63fc5bfa9e58a50e04e7fd2bd3522f89f",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        6,
+        22,
+        6,
+        22
+      ],
+      "kept_volume_ratio": 0.30439952437574314,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/33_缺陷_B1022-0044_钻孔2166.png",
+      "array_file": "裁剪后体数据/33_缺陷_B1022-0044_钻孔2166.npz",
+      "center_yx": [
+        14.0,
+        14.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [
+        "奇数原宽29保留16：中心误差0.5体素"
+      ],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        13.5,
+        13.5
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\33_缺陷_B1022-0044_钻孔2166.npz",
+      "source_original_npz_sha256": "35f9676b40d7f5dcec2477db9d7b132c83c86447c3450b26651eba0235438d5b"
+    },
+    {
+      "index": 34,
+      "sample_id": "clear|defective|VT-X750-1131_0000000001_20250717WB_2518V668151403_20250717130704-NG|1712|c678d815e6fa36d6",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1131_0000000001_20250717WB_2518V668151403_20250717130704-NG",
+      "board_key": "B1131-0001",
+      "sequence": "1712",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "crop_shape_dhw": [
+        40,
+        21,
+        21
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1131_0000000001_20250717WB_2518V668151403_20250717130704-NG\\drill\\drill-1712-3.0590_37_37_40-0.raw",
+      "raw_sha256": "27a611f90f0f392657093bd89b6a3ba97acf61d60d80f7b852b99b5114aa05cd",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        8,
+        29,
+        8,
+        29
+      ],
+      "kept_volume_ratio": 0.32213294375456536,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/34_缺陷_B1131-0001_钻孔1712.png",
+      "array_file": "裁剪后体数据/34_缺陷_B1131-0001_钻孔1712.npz",
+      "center_yx": [
+        18.0,
+        18.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        18.0,
+        18.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\34_缺陷_B1131-0001_钻孔1712.npz",
+      "source_original_npz_sha256": "cd9909ca58f93ab6aeaedd576b449272e9df7596f3b7e7d06126205a90ed859c"
+    },
+    {
+      "index": 35,
+      "sample_id": "fuzzy|defective|VT-X750-1151_0000000001_20260113_2536V692101203_20260113015951|2037|e15afe6a475631f2",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1151_0000000001_20260113_2536V692101203_20260113015951",
+      "board_key": "B1151-0001",
+      "sequence": "2037",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "crop_shape_dhw": [
+        40,
+        21,
+        21
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1151_0000000001_20260113_2536V692101203_20260113015951\\drill\\drill-2037-3.5150_37_37_40-0.raw",
+      "raw_sha256": "399c403e75aa09eb937ba4f0c3727d1a5c3bfb091bb4b26c78e4f900a572d304",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        8,
+        29,
+        8,
+        29
+      ],
+      "kept_volume_ratio": 0.32213294375456536,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/35_缺陷_B1151-0001_钻孔2037.png",
+      "array_file": "裁剪后体数据/35_缺陷_B1151-0001_钻孔2037.npz",
+      "center_yx": [
+        18.0,
+        18.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        18.0,
+        18.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\35_缺陷_B1151-0001_钻孔2037.npz",
+      "source_original_npz_sha256": "17523b49e0e5842a3a77029086d29130ea0b1b63ec162c1c1b8f27c5dab91487"
+    },
+    {
+      "index": 36,
+      "sample_id": "clear|defective|VT-X750-1077_0000000004_20250719_2527V679844503_20250719022216-must|2432|2594251d37196fe0",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1077_0000000004_20250719_2527V679844503_20250719022216-must",
+      "board_key": "B1077-0004",
+      "sequence": "2432",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "crop_shape_dhw": [
+        40,
+        21,
+        21
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1077_0000000004_20250719_2527V679844503_20250719022216-must\\drill\\drill-2432-3.9730_37_37_40-9.raw",
+      "raw_sha256": "bb3ec4602f48106ec74d83423032ee3cb5d7c16c4d809627b8d4f5af84c2fcf2",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        8,
+        29,
+        8,
+        29
+      ],
+      "kept_volume_ratio": 0.32213294375456536,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/36_缺陷_B1077-0004_钻孔2432.png",
+      "array_file": "裁剪后体数据/36_缺陷_B1077-0004_钻孔2432.npz",
+      "center_yx": [
+        18.0,
+        18.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        18.0,
+        18.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\36_缺陷_B1077-0004_钻孔2432.npz",
+      "source_original_npz_sha256": "b343344ea04f6d6a10864a9e339c5f1161f6ef45cc37075ad59ca8c039434cab"
+    },
+    {
+      "index": 37,
+      "sample_id": "reviewed_defect|defective|VT-X750-1029_0000000026_20250830_2512V662812901_20250830190312|1775|4cb82f3e14e32a0e",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1029_0000000026_20250830_2512V662812901_20250830190312",
+      "board_key": "B1029-0026",
+      "sequence": "1775",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "crop_shape_dhw": [
+        40,
+        21,
+        21
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1029_0000000026_20250830_2512V662812901_20250830190312\\drill\\drill-1775-3.0000_37_37_40-14.raw",
+      "raw_sha256": "e9137bfd650026bb33e0a215ded9abf5efe8e120508f9ceb8a0a4748da98cfd1",
+      "direction_flipped": false,
+      "validation_fold": 3,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        8,
+        29,
+        8,
+        29
+      ],
+      "kept_volume_ratio": 0.32213294375456536,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/37_缺陷_B1029-0026_钻孔1775.png",
+      "array_file": "裁剪后体数据/37_缺陷_B1029-0026_钻孔1775.npz",
+      "center_yx": [
+        18.0,
+        18.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        18.0,
+        18.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\37_缺陷_B1029-0026_钻孔1775.npz",
+      "source_original_npz_sha256": "e60ab2f06b806409af077640c2002b4f82786e8b31a42f2f4202ab26d11a83d2"
+    },
+    {
+      "index": 38,
+      "sample_id": "clear|defective|VT-X750-1150_0000000068_20260114WB_2552V615144303_20260114221916|0015|f01b697b05e4aaab",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1150_0000000068_20260114WB_2552V615144303_20260114221916",
+      "board_key": "B1150-0068",
+      "sequence": "0015",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "crop_shape_dhw": [
+        40,
+        27,
+        27
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1150_0000000068_20260114WB_2552V615144303_20260114221916\\drill\\drill-0015-3.5160_49_49_40-5.raw",
+      "raw_sha256": "2621e3c6a1a0f9b8dacf9a0bf0214e4441b8942264a409fc5af734d8542a2313",
+      "direction_flipped": true,
+      "validation_fold": 4,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        11,
+        38,
+        11,
+        38
+      ],
+      "kept_volume_ratio": 0.3036234902124115,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/38_缺陷_B1150-0068_钻孔0015.png",
+      "array_file": "裁剪后体数据/38_缺陷_B1150-0068_钻孔0015.npz",
+      "center_yx": [
+        24.0,
+        24.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        24.0,
+        24.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\38_缺陷_B1150-0068_钻孔0015.npz",
+      "source_original_npz_sha256": "ed9c3d38af2cc7ca825ff00b3c337be7188e793a433157012fbb7a14268049f1"
+    },
+    {
+      "index": 39,
+      "sample_id": "fuzzy|defective|VT-X750-1146_0000000001_20260128WB_2604V621785901_20260128182928|1823|864602597ee164e3",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1146_0000000001_20260128WB_2604V621785901_20260128182928",
+      "board_key": "B1146-0001",
+      "sequence": "1823",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "crop_shape_dhw": [
+        40,
+        27,
+        27
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1146_0000000001_20260128WB_2604V621785901_20260128182928\\drill\\drill-1823-3.0590_49_49_40-9.raw",
+      "raw_sha256": "df89c5f1a2778878fd2d573fd908f84217c7a0b3709e3eafbb7b8f32ef25afaa",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        11,
+        38,
+        11,
+        38
+      ],
+      "kept_volume_ratio": 0.3036234902124115,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/39_缺陷_B1146-0001_钻孔1823.png",
+      "array_file": "裁剪后体数据/39_缺陷_B1146-0001_钻孔1823.npz",
+      "center_yx": [
+        24.0,
+        24.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        24.0,
+        24.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\39_缺陷_B1146-0001_钻孔1823.npz",
+      "source_original_npz_sha256": "05731dd27073f73ba204499e3ce5ab7964fa42951913e146cd0b7d076c741942"
+    },
+    {
+      "index": 40,
+      "sample_id": "clear|defective|VT-X750-1077_0000000001_20260113FZ_2533V686021602_20260113045203|0277|5000ea629748caeb",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1077_0000000001_20260113FZ_2533V686021602_20260113045203",
+      "board_key": "B1077-0001",
+      "sequence": "0277",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "crop_shape_dhw": [
+        40,
+        27,
+        27
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1077_0000000001_20260113FZ_2533V686021602_20260113045203\\drill\\drill-0277-0.3090_49_49_40-21.raw",
+      "raw_sha256": "169fb4668ce55e5051af23055a1a20dfbc2e6dbee96a48eac75dfe1c55e59287",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "crop_mode": "center-55",
+      "roi_yx_exclusive": [
+        11,
+        38,
+        11,
+        38
+      ],
+      "kept_volume_ratio": 0.3036234902124115,
+      "grayscale_bit_identical": true,
+      "png_file": "单样本对照图/40_缺陷_B1077-0001_钻孔0277.png",
+      "array_file": "裁剪后体数据/40_缺陷_B1077-0001_钻孔0277.npz",
+      "center_yx": [
+        24.0,
+        24.0
+      ],
+      "rounding": "ceil(55*n/100);start=floor((n-kept)/2)",
+      "flags": [],
+      "status": "固定原图中心55%裁剪；需看图确认凸起是否碰框",
+      "crop_description": "原图中心裁剪，H/W各保留55%（向上取整）",
+      "actual_crop_center_yx": [
+        24.0,
+        24.0
+      ],
+      "source_original_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1\\裁剪后体数据\\40_缺陷_B1077-0001_钻孔0277.npz",
+      "source_original_npz_sha256": "eeb5cea3831b84d72d74886e680af43743b36f80f5a5053f4be61f7130d28b5c"
+    }
+  ]
+}

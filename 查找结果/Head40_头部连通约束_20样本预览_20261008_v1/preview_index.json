@@ -1,0 +1,924 @@
+{
+  "config": {
+    "representation": "seed_connected_head_surface_band_candidate",
+    "version": "preview_20261008_v1",
+    "preview_only": true,
+    "validated_for_training": false,
+    "original_preview": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_3D_Canny_20样本预览_20261005",
+    "source_index_sha256": "471f51835781be209812c6c7e6d4c823131855827db4f38248ed676d0cbc357f",
+    "input": "existing_npz.image; already_direction_unified_and_normalized; no_second_flip_or_normalization",
+    "gaussian_sigma": [
+      1,
+      1,
+      1
+    ],
+    "gaussian_mode": "reflect",
+    "gaussian_truncate": 4,
+    "seed": "argmax_smooth_D4_to10_in_central_disk_radius_0.30_minHW",
+    "core_threshold": 0.75,
+    "body_threshold": 0.4,
+    "search_margin_voxels": 5,
+    "scope": "bbox_of_connected_core_D4_to10_footprint_in_central_disk_plus5",
+    "body_connectivity": 26,
+    "external_background_connectivity": 6,
+    "head_start": "existing_crop_reference_D14_if_flipped_else15_minus6",
+    "dilation": "full3x3x3_once",
+    "canny": false,
+    "augment": false,
+    "known_limitations": [
+      "阈值和范围为统一预览候选，未做正式训练参数估计",
+      "开放孔腔内壁无法仅用外部洪泛完全排除",
+      "搜索框可截断凸起；相连背景可能泄漏；真实原始截断无法恢复"
+    ],
+    "source_data_modified": false
+  },
+  "samples": [
+    {
+      "index": 1,
+      "sample_id": "clear|normal|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|0556|a84bdac8afbdd393",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "0556",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-0556-0.7660_29_29_40-8.raw",
+      "raw_sha256": "0d1ad45a11290de986a2cebcbee93b689bc4cd0218bac9a090ed374e0ac23f5f",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "png_file": "单样本对照图/01_正常_B1022-0044_钻孔0556.png",
+      "array_file": "处理后体数据/01_正常_B1022-0044_钻孔0556.npz",
+      "seed_dhw": [
+        4,
+        13,
+        17
+      ],
+      "seed_value": 0.9698644876480103,
+      "scope_yx_exclusive": [
+        4,
+        24,
+        4,
+        24
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.06846016646848989,
+      "surface_ratio": 0.0111474435196195,
+      "mask_ratio": 0.047651605231866824,
+      "retained_intensity_ratio": 0.07375364750623703,
+      "flags": [],
+      "status": "待人工验收",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "f5811370218faaea3337bc7ef34cb2bc44c990d20733e3332b70d75449c5fba5"
+    },
+    {
+      "index": 2,
+      "sample_id": "fuzzy|normal|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|2175|09548e71217a47f9",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "2175",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-2175-3.5150_29_29_40-12.raw",
+      "raw_sha256": "fe02b99e52c8251335e08ee3b038728c58dd91ce2875ee94bb09bc198b4aa3b6",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "png_file": "单样本对照图/02_正常_B1022-0044_钻孔2175.png",
+      "array_file": "处理后体数据/02_正常_B1022-0044_钻孔2175.npz",
+      "seed_dhw": [
+        4,
+        16,
+        14
+      ],
+      "seed_value": 0.9512496590614319,
+      "scope_yx_exclusive": [
+        4,
+        23,
+        4,
+        23
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.06367419738406659,
+      "surface_ratio": 0.009988109393579072,
+      "mask_ratio": 0.04298454221165279,
+      "retained_intensity_ratio": 0.0657920315861702,
+      "flags": [],
+      "status": "待人工验收",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "8d2f06967f7a5f47af8b8426503b9a29dd59575a131c0760dd94ff12ee9a8914"
+    },
+    {
+      "index": 3,
+      "sample_id": "clear|normal|VT-X750-1305_0000000007_20260124WB_2602V619861402_20260124180218|0011|58178006afb77b68",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1305_0000000007_20260124WB_2602V619861402_20260124180218",
+      "board_key": "B1305-0007",
+      "sequence": "0011",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1305_0000000007_20260124WB_2602V619861402_20260124180218\\drill\\drill-0011-3.5160_49_49_40-5.raw",
+      "raw_sha256": "06caf0f343172d6cb61ccfff4747776f1b489ed911223ce286af82e9df2a209a",
+      "direction_flipped": true,
+      "validation_fold": 3,
+      "png_file": "单样本对照图/03_正常_B1305-0007_钻孔0011.png",
+      "array_file": "处理后体数据/03_正常_B1305-0007_钻孔0011.npz",
+      "seed_dhw": [
+        4,
+        21,
+        29
+      ],
+      "seed_value": 0.9886293411254883,
+      "scope_yx_exclusive": [
+        11,
+        38,
+        11,
+        38
+      ],
+      "head_reference_d": 14,
+      "head_start_d": 8,
+      "body_ratio": 0.06445231153685964,
+      "surface_ratio": 0.007538525614327363,
+      "mask_ratio": 0.03412119950020825,
+      "retained_intensity_ratio": 0.0529501810669899,
+      "flags": [],
+      "status": "待人工验收",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "710f3d82a06221d5230e4d6dbcf5b03c8f966bae51b90c15c62469b056c9c46c"
+    },
+    {
+      "index": 4,
+      "sample_id": "fuzzy|normal|VT-X750-1305_0000000004_20260208WB_2604V626458002_20260208122741|2184|b2c39c7d6e7c2444",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1305_0000000004_20260208WB_2604V626458002_20260208122741",
+      "board_key": "B1305-0004",
+      "sequence": "2184",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1305_0000000004_20260208WB_2604V626458002_20260208122741\\drill\\drill-2184-3.5150_49_49_40-20.raw",
+      "raw_sha256": "75f536b44c02837ed328873a2b065f2348e23f63b414e9b2d8fc3de4c8431fde",
+      "direction_flipped": false,
+      "validation_fold": 2,
+      "png_file": "单样本对照图/04_正常_B1305-0004_钻孔2184.png",
+      "array_file": "处理后体数据/04_正常_B1305-0004_钻孔2184.npz",
+      "seed_dhw": [
+        4,
+        30,
+        26
+      ],
+      "seed_value": 0.9813469052314758,
+      "scope_yx_exclusive": [
+        12,
+        38,
+        12,
+        37
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.042659308621407745,
+      "surface_ratio": 0.007340691378592253,
+      "mask_ratio": 0.030612244897959183,
+      "retained_intensity_ratio": 0.06873370707035065,
+      "flags": [],
+      "status": "待人工验收",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "caf7c0185b041856af630a3db87e1d45583b46b604438cfc185789602af47cdc"
+    },
+    {
+      "index": 5,
+      "sample_id": "clear|normal|VT-X750-1029_0000000025_20250830_2512V664215403_20250830185448|0535|7eb75edf8ee19211",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1029_0000000025_20250830_2512V664215403_20250830185448",
+      "board_key": "B1029-0025",
+      "sequence": "0535",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1029_0000000025_20250830_2512V664215403_20250830185448\\drill\\drill-0535-0.6990_37_37_40-10.raw",
+      "raw_sha256": "628544247d50ad4fc101e4c34deef5d7d48d0dbe77db8ddb361e4df9b76064ba",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "png_file": "单样本对照图/05_正常_B1029-0025_钻孔0535.png",
+      "array_file": "处理后体数据/05_正常_B1029-0025_钻孔0535.npz",
+      "seed_dhw": [
+        4,
+        14,
+        15
+      ],
+      "seed_value": 0.9228675961494446,
+      "scope_yx_exclusive": [
+        7,
+        29,
+        4,
+        25
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.05341490138787436,
+      "surface_ratio": 0.006939371804236669,
+      "mask_ratio": 0.03060628195763331,
+      "retained_intensity_ratio": 0.0530361644923687,
+      "flags": [],
+      "status": "待人工验收",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "ce05ffaf6c2ebfe6ae5fc5cbd2ca466ecc55dafa2b697e7839582b50a3fb1be3"
+    },
+    {
+      "index": 6,
+      "sample_id": "clear|normal|VT-X750-1029_0000000034_20250830_2512V662871901_20250830211545|0085|680712e71b3b847e",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1029_0000000034_20250830_2512V662871901_20250830211545",
+      "board_key": "B1029-0034",
+      "sequence": "0085",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1029_0000000034_20250830_2512V662871901_20250830211545\\drill\\drill-0085-0.2410_37_37_40-1.raw",
+      "raw_sha256": "92b69ecb90d1a095c11999d07ecc4e0200235b7ed7e7abfb5c95246452c076ab",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "png_file": "单样本对照图/06_正常_B1029-0034_钻孔0085.png",
+      "array_file": "处理后体数据/06_正常_B1029-0034_钻孔0085.npz",
+      "seed_dhw": [
+        4,
+        21,
+        13
+      ],
+      "seed_value": 0.9723113179206848,
+      "scope_yx_exclusive": [
+        8,
+        30,
+        6,
+        27
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.06985025566106647,
+      "surface_ratio": 0.01183345507669832,
+      "mask_ratio": 0.048447772096420746,
+      "retained_intensity_ratio": 0.07199326157569885,
+      "flags": [],
+      "status": "待人工验收",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "44888e9cbe7699303f29b78f49a68b4ecd3e91179a1fcaa425b7da417d180a2a"
+    },
+    {
+      "index": 7,
+      "sample_id": "clear|normal|VT-X750-1029_0000000023_20250830_2512V663696801_20250830183603|0438|2bedd6de41a015bd",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1029_0000000023_20250830_2512V663696801_20250830183603",
+      "board_key": "B1029-0023",
+      "sequence": "0438",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1029_0000000023_20250830_2512V663696801_20250830183603\\drill\\drill-0438-0.6990_37_37_40-11.raw",
+      "raw_sha256": "f80691b66bfdb87fe999988cef4b933406072004286dd2f472311a080d6fa88b",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "png_file": "单样本对照图/07_正常_B1029-0023_钻孔0438.png",
+      "array_file": "处理后体数据/07_正常_B1029-0023_钻孔0438.npz",
+      "seed_dhw": [
+        4,
+        18,
+        12
+      ],
+      "seed_value": 0.955564022064209,
+      "scope_yx_exclusive": [
+        8,
+        31,
+        6,
+        28
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.05668371073776479,
+      "surface_ratio": 0.0075420014609203796,
+      "mask_ratio": 0.03420379839298758,
+      "retained_intensity_ratio": 0.05883285030722618,
+      "flags": [],
+      "status": "待人工验收",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "1236189927900f36d11cedb15056a012f1bf5c992b6cd16787d70fe019283685"
+    },
+    {
+      "index": 8,
+      "sample_id": "clear|normal|VT-X750-1252_0000000001_12_2536V692111802_20260208014127|1258|b2cd06384f96a5c7",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "clear",
+      "board": "VT-X750-1252_0000000001_12_2536V692111802_20260208014127",
+      "board_key": "B1252-0001",
+      "sequence": "1258",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1252_0000000001_12_2536V692111802_20260208014127\\drill\\drill-1258-1.6780_37_37_40-11.raw",
+      "raw_sha256": "dd397ac4b47bd2952535eea57cb77bef1dd57ab8fa75ed87c7058b9f23d52d23",
+      "direction_flipped": false,
+      "validation_fold": 2,
+      "png_file": "单样本对照图/08_正常_B1252-0001_钻孔1258.png",
+      "array_file": "处理后体数据/08_正常_B1252-0001_钻孔1258.npz",
+      "seed_dhw": [
+        4,
+        21,
+        20
+      ],
+      "seed_value": 0.9844629764556885,
+      "scope_yx_exclusive": [
+        7,
+        29,
+        8,
+        30
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.08586559532505478,
+      "surface_ratio": 0.013842220598977356,
+      "mask_ratio": 0.05807158509861213,
+      "retained_intensity_ratio": 0.08253160864114761,
+      "flags": [
+        "主体碰搜索框：范围不足或背景误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "d2dab57bf46d4c3e9f2b496e9443363356c19b36e45062ba876245241130896f"
+    },
+    {
+      "index": 9,
+      "sample_id": "fuzzy|normal|VT-X750-1096_0000000001_20250715WB_2518V668151403_20250715135441|1903|de05aac7178a67ff",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1096_0000000001_20250715WB_2518V668151403_20250715135441",
+      "board_key": "B1096-0001",
+      "sequence": "1903",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1096_0000000001_20250715WB_2518V668151403_20250715135441\\drill\\drill-1903-3.0590_37_37_40-11.raw",
+      "raw_sha256": "db8f308461c904fd7de801ec6e7ab40be5305f95d4f65e2d52b70f48ad8d7396",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "png_file": "单样本对照图/09_正常_B1096-0001_钻孔1903.png",
+      "array_file": "处理后体数据/09_正常_B1096-0001_钻孔1903.npz",
+      "seed_dhw": [
+        4,
+        14,
+        17
+      ],
+      "seed_value": 0.9247597455978394,
+      "scope_yx_exclusive": [
+        7,
+        30,
+        8,
+        30
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.12182249817384952,
+      "surface_ratio": 0.009952520087655223,
+      "mask_ratio": 0.04556245434623813,
+      "retained_intensity_ratio": 0.04234554246068001,
+      "flags": [
+        "主体碰搜索框：范围不足或背景误连接",
+        "主体碰D=39：可能原始截断或上方误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "9994baca97ee7ed75eadf1ae2d9e189575235133a36f4260ea4b4eaee79412fc"
+    },
+    {
+      "index": 10,
+      "sample_id": "fuzzy|normal|VT-X750-1305_0000000001_20260227_2512V663586501_20260227034814|1822|fdf27480dee52497",
+      "label": "normal",
+      "label_cn": "正常",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1305_0000000001_20260227_2512V663586501_20260227034814",
+      "board_key": "B1305-0001",
+      "sequence": "1822",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\normal_samples_by_board\\VT-X750-1305_0000000001_20260227_2512V663586501_20260227034814\\drill\\drill-1822-3.0000_37_37_40-22.raw",
+      "raw_sha256": "29af5d861884ac54dfa69c6a2d5c86bd7bedb56816cac6414e16242101883c15",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "png_file": "单样本对照图/10_正常_B1305-0001_钻孔1822.png",
+      "array_file": "处理后体数据/10_正常_B1305-0001_钻孔1822.npz",
+      "seed_dhw": [
+        4,
+        18,
+        23
+      ],
+      "seed_value": 0.9662131667137146,
+      "scope_yx_exclusive": [
+        7,
+        30,
+        7,
+        31
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.11838933528122718,
+      "surface_ratio": 0.018571950328707086,
+      "mask_ratio": 0.07773922571219868,
+      "retained_intensity_ratio": 0.08325812965631485,
+      "flags": [
+        "主体碰搜索框：范围不足或背景误连接",
+        "主体碰D=39：可能原始截断或上方误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "df19c731a9eb8ecd5e84b29310ca08bb219767669db1fb2402ab60bceb01362f"
+    },
+    {
+      "index": 11,
+      "sample_id": "clear|defective|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|2168|07dc716002c647d4",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "2168",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-2168-3.5150_29_29_40-12.raw",
+      "raw_sha256": "3843e747e4fb48a8d8d8245133d1fa978395c4dc3abc962c310b3fe78c92307c",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "png_file": "单样本对照图/11_缺陷_B1022-0044_钻孔2168.png",
+      "array_file": "处理后体数据/11_缺陷_B1022-0044_钻孔2168.npz",
+      "seed_dhw": [
+        4,
+        11,
+        15
+      ],
+      "seed_value": 0.9630783200263977,
+      "scope_yx_exclusive": [
+        4,
+        24,
+        4,
+        24
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.07271105826397146,
+      "surface_ratio": 0.012425683709869203,
+      "mask_ratio": 0.05428061831153389,
+      "retained_intensity_ratio": 0.07226143032312393,
+      "flags": [],
+      "status": "待人工验收",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "ee10d07a912ef1f43f99f3aa5a4e8e67311769f310b63bbda7d744bdf8e85f02"
+    },
+    {
+      "index": 12,
+      "sample_id": "fuzzy|defective|VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823|1234|fb90176141109bb7",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823",
+      "board_key": "B1022-0044",
+      "sequence": "1234",
+      "shape_dhw": [
+        40,
+        29,
+        29
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1022_0000000044_20260106W_2552V612534501_20260106184823\\drill\\drill-1234-1.6780_29_29_40-6.raw",
+      "raw_sha256": "de03c755d846f6ecf2336c9c5835f41ab8da35f83c7078fd98286d3d1ca61a79",
+      "direction_flipped": false,
+      "validation_fold": 3,
+      "png_file": "单样本对照图/12_缺陷_B1022-0044_钻孔1234.png",
+      "array_file": "处理后体数据/12_缺陷_B1022-0044_钻孔1234.npz",
+      "seed_dhw": [
+        4,
+        17,
+        12
+      ],
+      "seed_value": 0.9494118690490723,
+      "scope_yx_exclusive": [
+        4,
+        25,
+        4,
+        24
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.14994054696789536,
+      "surface_ratio": 0.021848989298454222,
+      "mask_ratio": 0.09563020214030915,
+      "retained_intensity_ratio": 0.0996265560388565,
+      "flags": [
+        "主体碰搜索框：范围不足或背景误连接",
+        "主体碰D=39：可能原始截断或上方误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "5925860e5c50f46d4666baad94656356e3f22d0dda7d3787da7b98ff1bf4af44"
+    },
+    {
+      "index": 13,
+      "sample_id": "clear|defective|VT-X750-1150_0000000068_20260114WB_2552V615144303_20260114221916|0032|db9c1cad80b8441e",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1150_0000000068_20260114WB_2552V615144303_20260114221916",
+      "board_key": "B1150-0068",
+      "sequence": "0032",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1150_0000000068_20260114WB_2552V615144303_20260114221916\\drill\\drill-0032-3.9730_49_49_40-15.raw",
+      "raw_sha256": "be4807054c17592952bf4e7b98afe6fc030e6860dc5bf7d38597547df7ad1231",
+      "direction_flipped": true,
+      "validation_fold": 3,
+      "png_file": "单样本对照图/13_缺陷_B1150-0068_钻孔0032.png",
+      "array_file": "处理后体数据/13_缺陷_B1150-0068_钻孔0032.npz",
+      "seed_dhw": [
+        4,
+        24,
+        28
+      ],
+      "seed_value": 0.9978422522544861,
+      "scope_yx_exclusive": [
+        12,
+        37,
+        13,
+        36
+      ],
+      "head_reference_d": 14,
+      "head_start_d": 8,
+      "body_ratio": 0.0745210329029571,
+      "surface_ratio": 0.010995418575593503,
+      "mask_ratio": 0.0468554768846314,
+      "retained_intensity_ratio": 0.060810212045907974,
+      "flags": [
+        "主体碰搜索框：范围不足或背景误连接",
+        "主体碰D=39：可能原始截断或上方误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "328c8cbe99af35b089c65fd0431bfa57610571e25343e07aec4e39dc5d4b55fe"
+    },
+    {
+      "index": 14,
+      "sample_id": "fuzzy|defective|VT-X750-1077_0000000001_20260113FZ_2533V686021602_20260113045203|1198|7f1023653336dec7",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1077_0000000001_20260113FZ_2533V686021602_20260113045203",
+      "board_key": "B1077-0001",
+      "sequence": "1198",
+      "shape_dhw": [
+        40,
+        49,
+        49
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1077_0000000001_20260113FZ_2533V686021602_20260113045203\\drill\\drill-1198-1.6780_49_49_40-6.raw",
+      "raw_sha256": "23cf5d9816798500f3ff4a987a64532fe5c7bf76ecbd6421ce925ce723c01378",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "png_file": "单样本对照图/14_缺陷_B1077-0001_钻孔1198.png",
+      "array_file": "处理后体数据/14_缺陷_B1077-0001_钻孔1198.npz",
+      "seed_dhw": [
+        4,
+        28,
+        28
+      ],
+      "seed_value": 0.9873453974723816,
+      "scope_yx_exclusive": [
+        11,
+        37,
+        11,
+        38
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.1016347355268638,
+      "surface_ratio": 0.01127655143690129,
+      "mask_ratio": 0.050322782174094124,
+      "retained_intensity_ratio": 0.05271977186203003,
+      "flags": [
+        "主体碰搜索框：范围不足或背景误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "cf69414e0bda8c9d53ef48c69de19c16db4403ca8c2dff297ed34480c573aceb"
+    },
+    {
+      "index": 15,
+      "sample_id": "clear|defective|VT-X750-1077_0000000004_20250719_2527V679844503_20250719022216-must|2300|34d977a766de8f3a",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1077_0000000004_20250719_2527V679844503_20250719022216-must",
+      "board_key": "B1077-0004",
+      "sequence": "2300",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1077_0000000004_20250719_2527V679844503_20250719022216-must\\drill\\drill-2300-3.9730_37_37_40-3.raw",
+      "raw_sha256": "0bfe9058476f4caabf2b1ad88c4795d799c61d4e4ab056e03874b75495aaff0e",
+      "direction_flipped": false,
+      "validation_fold": 4,
+      "png_file": "单样本对照图/15_缺陷_B1077-0004_钻孔2300.png",
+      "array_file": "处理后体数据/15_缺陷_B1077-0004_钻孔2300.npz",
+      "seed_dhw": [
+        4,
+        15,
+        19
+      ],
+      "seed_value": 0.9972136616706848,
+      "scope_yx_exclusive": [
+        7,
+        29,
+        7,
+        29
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.0685536888239591,
+      "surface_ratio": 0.011084733382030679,
+      "mask_ratio": 0.04738860482103725,
+      "retained_intensity_ratio": 0.0772283747792244,
+      "flags": [
+        "主体碰D=39：可能原始截断或上方误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "d7308c88d97a7b56c7508d7ad171b65bf2b881bffaf1294e34229bb0ffd16077"
+    },
+    {
+      "index": 16,
+      "sample_id": "reviewed_defect|defective|VT-X750-1029_0000000032_20250830_2512V663882803_20250830204926|2369|ceeb4915d643adc5",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1029_0000000032_20250830_2512V663882803_20250830204926",
+      "board_key": "B1029-0032",
+      "sequence": "2369",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1029_0000000032_20250830_2512V663882803_20250830204926\\drill\\drill-2369-3.9150_37_37_40-12.raw",
+      "raw_sha256": "61c8a11df294b0cca0e5e7ea5b6b63d71b832916b4d560f90b65d595b3a6e797",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "png_file": "单样本对照图/16_缺陷_B1029-0032_钻孔2369.png",
+      "array_file": "处理后体数据/16_缺陷_B1029-0032_钻孔2369.npz",
+      "seed_dhw": [
+        4,
+        13,
+        14
+      ],
+      "seed_value": 0.9878932237625122,
+      "scope_yx_exclusive": [
+        6,
+        21,
+        6,
+        24
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.041179693206720235,
+      "surface_ratio": 0.011212563915266618,
+      "mask_ratio": 0.042987582176771365,
+      "retained_intensity_ratio": 0.08880200982093811,
+      "flags": [
+        "主体碰搜索框：范围不足或背景误连接",
+        "主体碰D=39：可能原始截断或上方误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "0378bf2fd774d112dbfc5635b8e79c3b52094cf9879abd0ceece0e52bbfd8199"
+    },
+    {
+      "index": 17,
+      "sample_id": "reviewed_defect|defective|VT-X750-1029_0000000026_20250830_2512V662812901_20250830190312|2004|8a3b9803aff7a572",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1029_0000000026_20250830_2512V662812901_20250830190312",
+      "board_key": "B1029-0026",
+      "sequence": "2004",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1029_0000000026_20250830_2512V662812901_20250830190312\\drill\\drill-2004-3.4580_37_37_40-13.raw",
+      "raw_sha256": "b8639afe2f5d8b0fab0211801681863b94c68d9e8f3867e45a6cd9dfc1ad7e5d",
+      "direction_flipped": false,
+      "validation_fold": 3,
+      "png_file": "单样本对照图/17_缺陷_B1029-0026_钻孔2004.png",
+      "array_file": "处理后体数据/17_缺陷_B1029-0026_钻孔2004.npz",
+      "seed_dhw": [
+        4,
+        16,
+        15
+      ],
+      "seed_value": 0.9697564840316772,
+      "scope_yx_exclusive": [
+        10,
+        31,
+        6,
+        27
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.06439006574141709,
+      "surface_ratio": 0.012691745799853908,
+      "mask_ratio": 0.05295836376917458,
+      "retained_intensity_ratio": 0.10741552710533142,
+      "flags": [
+        "主体碰D=39：可能原始截断或上方误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "7bae23437506c05d8f2ba257cd0e3cdbcd16a83c4cb58bd7dfe6e35f0a0e7f81"
+    },
+    {
+      "index": 18,
+      "sample_id": "clear|defective|VT-X750-1029_0000000002_20251129W_2512V664184201_20251129133922|0586|7d7154354809ea03",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "clear",
+      "board": "VT-X750-1029_0000000002_20251129W_2512V664184201_20251129133922",
+      "board_key": "B1029-0002",
+      "sequence": "0586",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1029_0000000002_20251129W_2512V664184201_20251129133922\\drill\\drill-0586-0.6990_37_37_40-14.raw",
+      "raw_sha256": "7cf6cbd9403d068a9ca640163d4b7e0255dac5691b9776666180b375f80167fa",
+      "direction_flipped": false,
+      "validation_fold": 2,
+      "png_file": "单样本对照图/18_缺陷_B1029-0002_钻孔0586.png",
+      "array_file": "处理后体数据/18_缺陷_B1029-0002_钻孔0586.npz",
+      "seed_dhw": [
+        4,
+        15,
+        21
+      ],
+      "seed_value": 0.915625274181366,
+      "scope_yx_exclusive": [
+        8,
+        28,
+        8,
+        28
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.05398100803506209,
+      "surface_ratio": 0.008491599707815925,
+      "mask_ratio": 0.03581081081081081,
+      "retained_intensity_ratio": 0.06309185177087784,
+      "flags": [],
+      "status": "待人工验收",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "d1de99f83eae601953c73f258bf698d3492d3f0078af3f58baf00ea15e355d3c"
+    },
+    {
+      "index": 19,
+      "sample_id": "reviewed_defect|defective|VT-X750-1029_0000000028_20250830_2512V662949003_20250830192406|1529|a3aa8dadf0e384ba",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1029_0000000028_20250830_2512V662949003_20250830192406",
+      "board_key": "B1029-0028",
+      "sequence": "1529",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1029_0000000028_20250830_2512V662949003_20250830192406\\drill\\drill-1529-2.5420_37_37_40-0.raw",
+      "raw_sha256": "8cdabd83ce866f6c26fa473e74c79c71755f68f309c2f2c76227f0e93ebdc6ed",
+      "direction_flipped": false,
+      "validation_fold": 1,
+      "png_file": "单样本对照图/19_缺陷_B1029-0028_钻孔1529.png",
+      "array_file": "处理后体数据/19_缺陷_B1029-0028_钻孔1529.npz",
+      "seed_dhw": [
+        4,
+        17,
+        18
+      ],
+      "seed_value": 0.9517040252685547,
+      "scope_yx_exclusive": [
+        8,
+        30,
+        3,
+        25
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.0839846603360117,
+      "surface_ratio": 0.01347699050401753,
+      "mask_ratio": 0.05964207450693937,
+      "retained_intensity_ratio": 0.07080008089542389,
+      "flags": [
+        "主体碰搜索框：范围不足或背景误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "4af37081f26113011c6ef0bf7ffe0ddb18eee4c14b4dc96c4f2a3efa0dc88cf8"
+    },
+    {
+      "index": 20,
+      "sample_id": "reviewed_defect|defective|VT-X750-1029_0000000027_20250830_2512V662905103_20250830191528|1605|2887afdc587e5d25",
+      "label": "defective",
+      "label_cn": "缺陷",
+      "difficulty": "fuzzy",
+      "board": "VT-X750-1029_0000000027_20250830_2512V662905103_20250830191528",
+      "board_key": "B1029-0027",
+      "sequence": "1605",
+      "shape_dhw": [
+        40,
+        37,
+        37
+      ],
+      "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1029_0000000027_20250830_2512V662905103_20250830191528\\drill\\drill-1605-2.5420_37_37_40-2.raw",
+      "raw_sha256": "952e550f8caa43a09bd88923a7ceca37ca510fc68f1d414b17f685f6b3227fc4",
+      "direction_flipped": false,
+      "validation_fold": 3,
+      "png_file": "单样本对照图/20_缺陷_B1029-0027_钻孔1605.png",
+      "array_file": "处理后体数据/20_缺陷_B1029-0027_钻孔1605.npz",
+      "seed_dhw": [
+        4,
+        12,
+        14
+      ],
+      "seed_value": 0.7719379663467407,
+      "scope_yx_exclusive": [
+        7,
+        24,
+        7,
+        24
+      ],
+      "head_reference_d": 15,
+      "head_start_d": 9,
+      "body_ratio": 0.04501460920379839,
+      "surface_ratio": 0.008199415631848065,
+      "mask_ratio": 0.033765522279035794,
+      "retained_intensity_ratio": 0.047180529683828354,
+      "flags": [
+        "主体碰搜索框：范围不足或背景误连接"
+      ],
+      "status": "需重点复核",
+      "open_inner_wall_exclusion": "未解决：开放孔腔与外界相连，头部窗口内内壁可能保留",
+      "source_npz_sha256": "60131f6e114bad0f4acfde61dc1f240d8b92c0b38fd8022361e635bc7d43f640"
+    }
+  ]
+}

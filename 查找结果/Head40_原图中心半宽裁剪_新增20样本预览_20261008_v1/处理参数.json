@@ -1,0 +1,37 @@
+{
+  "version": "center_half_additional20_20261008_v1",
+  "crop_mode": "center-half",
+  "preview_only": true,
+  "source_manifest": "E:\\pythonproject\\3d_cnn_classify _K\\datasets\\resnet18_head40_toml_direction_unified_multiboard_5fold_clear_fuzzy_20260924\\fold_0\\train.csv",
+  "source_manifest_sha256": "3e2e1256fb91c1c352945dc1083369b4d5ac2a650001332708820f6aa8704a35",
+  "dataset_root": "H:\\多板数据集\\multiboard_head40_toml",
+  "exclusion_preview": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_20样本预览_20261008_v1",
+  "selection": "per_class_3_at29_4_at37_3_at49;6clear4fuzzy;prioritize_board_diversity_then_sha256",
+  "normalization": {
+    "method": "sample_percentile",
+    "scope": "per_sample_head40_roi",
+    "lower_percentile": 1.0,
+    "upper_percentile": 99.0,
+    "clip_min": 0.0,
+    "clip_max": 1.0,
+    "statistics_source": "each_pre_cropped_head40_roi_itself"
+  },
+  "direction": {
+    "enabled": true,
+    "axis": "D",
+    "target_head_side": "high_depth_index",
+    "bHeadUp_false": "keep",
+    "bHeadUp_true": "flip_D",
+    "application_stage": "before_augmentation_and_normalization",
+    "physical_raw_files_modified": false
+  },
+  "augment": false,
+  "crop_width": "ceil(original_width/2);fixed_original_geometric_center",
+  "depth": 40,
+  "denoising": false,
+  "segmentation": false,
+  "edge_mask": false,
+  "resize": false,
+  "training_run": false,
+  "caveat": "固定中心可能截断偏心/倾斜凸起；中心切片未必经过凸起，需看图确认"
+}

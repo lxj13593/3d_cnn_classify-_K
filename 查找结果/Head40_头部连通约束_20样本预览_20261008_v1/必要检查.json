@@ -1,0 +1,20 @@
+{
+  "sample_count": 20,
+  "old_index_and_arrays_unchanged": true,
+  "same_twenty_ids_in_same_order": true,
+  "empty_masks": 0,
+  "flagged_samples": [
+    8,
+    9,
+    10,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    19,
+    20
+  ],
+  "training_run": false
+}

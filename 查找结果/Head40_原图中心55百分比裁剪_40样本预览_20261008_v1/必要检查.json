@@ -1,0 +1,8 @@
+{
+  "sample_count": 40,
+  "unique_sample_ids": 40,
+  "all_depths40": true,
+  "all_crops_bit_identical": true,
+  "old_results_unchanged": true,
+  "training_run": false
+}

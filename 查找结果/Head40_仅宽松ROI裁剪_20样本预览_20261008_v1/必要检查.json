@@ -1,0 +1,9 @@
+{
+  "sample_count": 20,
+  "same_ids_and_order": true,
+  "all_depths40": true,
+  "all_crops_bit_identical": true,
+  "old_versions_unchanged": true,
+  "old_artifact_count": 191,
+  "training_run": false
+}

@@ -1,0 +1,33 @@
+{
+  "representation": "seed_connected_head_surface_band_candidate",
+  "version": "preview_20261008_v1",
+  "preview_only": true,
+  "validated_for_training": false,
+  "original_preview": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_3D_Canny_20样本预览_20261005",
+  "source_index_sha256": "471f51835781be209812c6c7e6d4c823131855827db4f38248ed676d0cbc357f",
+  "input": "existing_npz.image; already_direction_unified_and_normalized; no_second_flip_or_normalization",
+  "gaussian_sigma": [
+    1,
+    1,
+    1
+  ],
+  "gaussian_mode": "reflect",
+  "gaussian_truncate": 4,
+  "seed": "argmax_smooth_D4_to10_in_central_disk_radius_0.30_minHW",
+  "core_threshold": 0.75,
+  "body_threshold": 0.4,
+  "search_margin_voxels": 5,
+  "scope": "bbox_of_connected_core_D4_to10_footprint_in_central_disk_plus5",
+  "body_connectivity": 26,
+  "external_background_connectivity": 6,
+  "head_start": "existing_crop_reference_D14_if_flipped_else15_minus6",
+  "dilation": "full3x3x3_once",
+  "canny": false,
+  "augment": false,
+  "known_limitations": [
+    "阈值和范围为统一预览候选，未做正式训练参数估计",
+    "开放孔腔内壁无法仅用外部洪泛完全排除",
+    "搜索框可截断凸起；相连背景可能泄漏；真实原始截断无法恢复"
+  ],
+  "source_data_modified": false
+}

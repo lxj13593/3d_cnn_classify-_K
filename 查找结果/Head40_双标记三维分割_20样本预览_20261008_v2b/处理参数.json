@@ -1,0 +1,38 @@
+{
+  "representation": "random_walker_head_surface_band_candidate",
+  "version": "preview_20261008_v2b",
+  "preview_only": true,
+  "validated_for_training": false,
+  "input": "old_npz.image_no_reflip_no_renormalization",
+  "gaussian_sigma": [
+    1,
+    1,
+    1
+  ],
+  "gaussian_mode": "reflect",
+  "gaussian_truncate": 4,
+  "foreground": "seed_connected_bright_core>=max(0.50,0.70*seedgray)_allD_in_lower_core_footprint_plus2",
+  "marker_version": "extended",
+  "background": "outside_search_rectangle_or_rectangle_lateral_faces_or_smoothed_gray<=0.18",
+  "rectangle_margin_voxels": 5,
+  "random_walker_beta": 130,
+  "solver": "cg_j",
+  "solver_tol": 0.0001,
+  "foreground_probability_cutoff": 0.5,
+  "head_start": "crop_reference_D14_if_flipped_else15_minus6",
+  "surface_band": "euclidean_distance_to_surface; weight=clip((3-distance)/2,0,1); within_scope_head_window",
+  "hole_filling": false,
+  "closing": false,
+  "canny": false,
+  "source_data_modified": false,
+  "numpy_version": "2.1.3",
+  "scipy_version": "1.15.3",
+  "skimage_version": "0.25.0",
+  "known_limitations": [
+    "自动背景标记可能误标凸起",
+    "头部窗口和搜索框未验证",
+    "开放孔腔内壁可能保留",
+    "RW概率不是正确率或标注真值"
+  ],
+  "reference": "https://scikit-image.org/docs/0.25.x/api/skimage.segmentation.html#skimage.segmentation.random_walker"
+}

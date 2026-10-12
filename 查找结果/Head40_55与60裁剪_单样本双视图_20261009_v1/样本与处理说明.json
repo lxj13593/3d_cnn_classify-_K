@@ -1,0 +1,40 @@
+{
+  "sample_id": "clear|defective|VT-X750-1150_0000000068_20260114WB_2552V615144303_20260114221916|0015|f01b697b05e4aaab",
+  "board": "VT-X750-1150_0000000068_20260114WB_2552V615144303_20260114221916",
+  "board_key": "B1150-0068",
+  "sequence": "0015",
+  "label": "defective",
+  "difficulty": "clear",
+  "original_shape_dhw": [
+    40,
+    49,
+    49
+  ],
+  "source_npz": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心55百分比裁剪_40样本预览_20261008_v1\\新增20个\\裁剪后体数据\\38_缺陷_B1150-0068_钻孔0015.npz",
+  "source_npz_sha256": "6b259cf8cec9a07f33632949077466007631160a544b0cb243bc094448f8a546",
+  "raw_path": "H:\\多板数据集\\multiboard_head40_toml\\defective_samples_by_board\\VT-X750-1150_0000000068_20260114WB_2552V615144303_20260114221916\\drill\\drill-0015-3.5160_49_49_40-5.raw",
+  "raw_sha256": "2621e3c6a1a0f9b8dacf9a0bf0214e4441b8942264a409fc5af734d8542a2313",
+  "direction_flipped": true,
+  "normalization": "existing original Head40 P1/P99, not repeated",
+  "front": "D-W at original H=24",
+  "side": "D-H at original W=24",
+  "crop55_box_yx_exclusive": [
+    11,
+    38,
+    11,
+    38
+  ],
+  "crop60_box_yx_exclusive": [
+    9,
+    39,
+    9,
+    39
+  ],
+  "rounding": "ceil(percent*n/100);start=floor((n-kept)/2)",
+  "grayscale_bit_identical": true,
+  "previous55_match": true,
+  "source_unchanged": true,
+  "denoising": false,
+  "resize": false,
+  "full20percent_sampling_started": false
+}

@@ -1,0 +1,16 @@
+{
+  "version": "center55_preview_20261008_v1",
+  "crop_mode": "center-55",
+  "fraction": 0.55,
+  "crop_width": "ceil(0.55*original_width)",
+  "positioning": "start=floor((original_width-kept)/2)",
+  "depth": 40,
+  "source_preview": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_原图中心半宽裁剪_新增20样本预览_20261008_v1",
+  "source_array": "image, not cropped",
+  "denoising": false,
+  "segmentation": false,
+  "resize": false,
+  "intensity_transform": false,
+  "dataset_modified": false,
+  "training_run": false
+}

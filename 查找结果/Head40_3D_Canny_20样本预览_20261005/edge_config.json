@@ -1,0 +1,53 @@
+{
+  "representation": "edge_head40_hard_mask",
+  "implementation_version": "preview_20261005_v1",
+  "fold": 0,
+  "seed_for_selection": 42,
+  "training_sample_count": 3492,
+  "training_manifest": "E:\\pythonproject\\3d_cnn_classify _K\\datasets\\resnet18_head40_toml_direction_unified_multiboard_5fold_clear_fuzzy_20260924\\fold_0\\train.csv",
+  "training_manifest_sha256": "3e2e1256fb91c1c352945dc1083369b4d5ac2a650001332708820f6aa8704a35",
+  "dataset_root": "H:\\多板数据集\\multiboard_head40_toml",
+  "normalization": {
+    "method": "sample_percentile",
+    "scope": "per_sample_head40_roi",
+    "lower_percentile": 1.0,
+    "upper_percentile": 99.0,
+    "clip_min": 0.0,
+    "clip_max": 1.0,
+    "statistics_source": "each_pre_cropped_head40_roi_itself"
+  },
+  "direction": {
+    "enabled": true,
+    "axis": "D",
+    "target_head_side": "high_depth_index",
+    "bHeadUp_false": "keep",
+    "bHeadUp_true": "flip_D",
+    "application_stage": "before_augmentation_and_normalization",
+    "physical_raw_files_modified": false
+  },
+  "augment": false,
+  "gaussian_sigma": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "gaussian_mode": "reflect",
+  "gaussian_truncate": 4.0,
+  "gradient": "numpy.gradient(edge_order=1, spacing=[1,1,1])",
+  "threshold_stage": "smoothed_gradient_before_nms",
+  "threshold_population": "all_finite_positive_fold0_training_voxels",
+  "gradient_value_count": 196938004,
+  "percentile": 90.0,
+  "percentile_method": "linear",
+  "high_threshold": 0.08181694149971008,
+  "low_threshold": 0.04090847074985504,
+  "nms": "3D_unit_gradient_direction_trilinear_order1; reject_outside_ROI",
+  "hysteresis_connectivity": 26,
+  "dilation": "full_3x3x3_once_border0",
+  "numpy_version": "2.3.4",
+  "scipy_version": "1.16.3",
+  "torch_version": "2.7.1+cu118",
+  "selection": "per_class_6_clear_4_fuzzy; 2_at_29_6_at_37_2_at_49; one_clear_49_requires_D_flip; prioritize_board_diversity_then_sha256(42|sample_id)",
+  "preview_only": true,
+  "source_data_modified": false
+}

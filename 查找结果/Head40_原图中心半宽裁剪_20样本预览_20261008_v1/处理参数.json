@@ -1,0 +1,19 @@
+{
+  "version": "roi_center_half_preview_20261008_v1",
+  "crop_mode": "center-half",
+  "preview_only": true,
+  "source_preview": "E:\\pythonproject\\3d_cnn_classify _K\\查找结果\\Head40_3D_Canny_20样本预览_20261005",
+  "input": "original_npz.image_direction_unified_normalized_once",
+  "depth": "all40_slices",
+  "localization": "original_geometric_center; no_gray_statistic",
+  "crop_width": "ceil(original_width/2); start=(original_width-crop_width)//2",
+  "denoising": false,
+  "segmentation": false,
+  "edge_mask": false,
+  "hole_filling": false,
+  "resize": false,
+  "intensity_transform": false,
+  "dataset_modified": false,
+  "training_run": false,
+  "caveat": "固定原图中心半宽，偏心/倾斜凸起可能碰框；框内上方背景不删除"
+}
